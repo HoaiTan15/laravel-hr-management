@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html lang="vi" style="width: 1280px; height: 1222px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chi tiết và xử lý phiếu yêu cầu - HUIT HR Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#004385",
+            secondary: "#F37021",
+            "surface-bg": "#F8F9FC"
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #F8F9FC;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-[#F8F9FC] font-sans text-slate-800 antialiased min-h-screen flex">
+<!-- SIDEBAR: Cố định 256px, nền trắng border-r border-slate-200 -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 z-50 flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Logo HUIT HR MANAGEMENT -->
+<div class="px-6 py-5 flex items-center gap-3 border-b border-slate-100">
+<div class="w-10 h-10 rounded-xl bg-[#004385] flex items-center justify-center shadow-sm">
+<span class="text-white font-bold text-xl tracking-tight">H</span>
+</div>
+<div class="flex flex-col">
+<span class="text-base font-bold text-[#004385] tracking-tight leading-tight">HUIT</span>
+<span class="text-[11px] text-[#F37021] font-semibold uppercase tracking-wider">HR MANAGEMENT</span>
+</div>
+</div>
+<!-- Menu Navigation (Đúng 5 mục) -->
+<nav class="flex flex-col gap-1.5 px-4 mt-4">
+<!-- Dashboard Admin -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-500">grid_view</span>
+<span>Dashboard Admin</span>
+</a>
+<!-- Danh sách PYC (ĐANG CHỌN) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#004385] text-white font-medium text-sm shadow-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px] text-white">receipt_long</span>
+<span>Danh sách PYC</span>
+</a>
+<!-- Quản lý tài khoản -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-500">manage_accounts</span>
+<span>Quản lý tài khoản</span>
+</a>
+<!-- Hồ sơ cá nhân -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-500">account_box</span>
+<span>Hồ sơ cá nhân</span>
+</a>
+</nav>
+</div>
+<!-- Mục Đăng xuất ở cuối cùng -->
+<div class="p-4 border-t border-slate-100">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-600 hover:bg-rose-50 transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px] text-rose-500">logout</span>
+<span>Đăng xuất</span>
+</a>
+</div>
+</aside>
+<!-- MAIN WRAPPER -->
+<div class="pl-64 flex flex-col flex-1 min-h-screen">
+<!-- TOPBAR: Nền trắng h-20 px-8 border-b border-slate-200 -->
+<header class="fixed top-0 left-64 right-0 h-20 bg-white/95 backdrop-blur-sm border-b border-slate-200 z-40 flex items-center justify-between px-8 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+<!-- Breadcrumb bên trái -->
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2 text-xs text-slate-500 font-medium">
+<span class="hover:text-slate-800 transition-colors cursor-pointer">Hệ thống quản trị</span>
+<span class="text-slate-300">/</span>
+<span class="hover:text-slate-800 transition-colors cursor-pointer">Danh sách phiếu yêu cầu</span>
+<span class="text-slate-300">/</span>
+<span class="text-[#004385] font-semibold">Chi tiết phiếu #PYC-2026-087</span>
+</div>
+<h2 class="text-base font-bold text-slate-800 tracking-tight mt-0.5">Xử lý &amp; Phê duyệt phiếu yêu cầu</h2>
+</div>
+<!-- Bên phải: Chuông thông báo & User badge -->
+<div class="flex items-center gap-5">
+<button aria-label="Notifications" class="relative p-2 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition-colors" type="button">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#F37021] ring-2 ring-white"></span>
+</button>
+<div class="flex items-center gap-3 pl-3 py-1.5 pr-4 bg-slate-50 hover:bg-slate-100/80 rounded-full border border-slate-200/80 transition-colors cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-[#004385] text-white flex items-center justify-center font-semibold text-xs shadow-sm">
+            NV
+          </div>
+<div class="flex flex-col text-left">
+<span class="text-xs font-bold text-slate-800 leading-tight">Nguyễn Văn Admin</span>
+<div class="flex items-center gap-1">
+<span class="text-[10px] font-bold text-[#F37021] uppercase">ADMIN</span>
+<span class="text-[9px] text-slate-400">▼</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- CONTENT VÙNG CHÍNH -->
+<main class="w-full pt-28 px-8 pb-12 bg-[#F8F9FC] flex-1">
+<!-- Header Trang -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div>
+<a class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 mb-2 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Quay lại danh sách</span>
+</a>
+<div class="flex flex-wrap items-center gap-3">
+<h1 class="text-2xl font-bold text-[#004385] tracking-tight">Phiếu yêu cầu #PYC-2026-087</h1>
+<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-semibold text-xs uppercase tracking-wide flex items-center gap-1.5 border border-amber-200">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              Đang xử lý
+            </span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-500 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-sm self-start sm:self-auto">
+<span class="material-symbols-outlined text-[16px] text-slate-400">schedule</span>
+<span>Ngày nộp: <strong class="text-slate-700 font-semibold">15/09/2026 09:15</strong></span>
+</div>
+</div>
+<!-- Grid 2 cột: Trái 8/12, Phải 4/12 -->
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- CỘT TRÁI (Khoảng 8/12 - ~65%) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col">
+<!-- Card 1: Thông tin phiếu & Người gửi -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm mb-6">
+<div class="flex items-center justify-between pb-4 border-b border-slate-100">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-blue-50 text-[#004385] border border-blue-100 flex items-center justify-center font-bold text-base shadow-sm">
+                  MA
+                </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-bold text-slate-900">Lê Thị Mai Anh</h3>
+<span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-mono text-xs font-semibold border border-slate-200">
+                      NV-HUIT-2024-090
+                    </span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5">
+                    Phòng Quản lý Đào tạo • <span class="text-slate-700 font-medium">maianh.lt@huit.edu.vn</span>
+</p>
+</div>
+</div>
+<span class="px-3 py-1 rounded-lg bg-blue-50 text-[#004385] font-semibold text-xs border border-blue-200">
+                Khác (Thay đổi hồ sơ cá nhân)
+              </span>
+</div>
+<div class="mt-4 pt-1">
+<div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Tiêu đề yêu cầu</div>
+<h4 class="text-sm font-semibold text-slate-900 leading-snug">
+                Yêu cầu cập nhật số CCCD gắn chip và ngày sinh trong cơ sở dữ liệu nhân sự
+              </h4>
+</div>
+<div class="mt-4 bg-[#F8F9FC] border border-slate-200/70 rounded-xl p-4">
+<div class="text-xs font-bold text-[#004385] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">description</span>
+                Nội dung giải trình từ cán bộ
+              </div>
+<p class="text-sm text-slate-700 leading-relaxed">
+                Tôi vừa hoàn tất thủ tục cấp đổi CCCD gắn chip mới tại Công an quận Tân Phú. Kính đề nghị Ban Quản trị hệ thống và Ban Giám hiệu cập nhật số định danh mới vào hồ sơ viên chức trường ĐH Công Thương TP.HCM.
+              </p>
+</div>
+</div>
+<!-- Card 2: Bảng đối chiếu so sánh dữ liệu Cũ vs Dữ liệu Mới đề nghị -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm mb-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-2">
+<div>
+<h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#004385] text-[20px]">published_with_changes</span>
+                  So sánh dữ liệu hồ sơ (Đối chiếu 1-1)
+                </h3>
+<p class="text-xs text-slate-500 mt-0.5">Kiểm tra tính nhất quán giữa dữ liệu số hóa và bản scan thực tế</p>
+</div>
+<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-medium text-xs border border-emerald-200 self-start sm:self-auto">
+                3 trường dữ liệu
+              </span>
+</div>
+<div class="overflow-x-auto mt-4 rounded-xl border border-slate-200">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-slate-50 text-slate-600 text-xs font-semibold uppercase tracking-wider border-b border-slate-200">
+<th class="py-3 px-4 font-semibold">Trường thông tin</th>
+<th class="py-3 px-4 font-semibold text-slate-500">Dữ liệu hiện tại (CSDL cũ)</th>
+<th class="py-3 px-4 font-semibold text-[#004385]">Dữ liệu đề nghị mới (Cập nhật)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200">
+<!-- Dòng 1: Số thẻ CCCD -->
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">badge</span>
+<span>Số thẻ CCCD / Định danh</span>
+</td>
+<td class="py-3.5 px-4 text-slate-500 font-mono">
+                      079095001234
+                    </td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 font-bold font-mono text-xs shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+<span>079095098765</span>
+<span class="px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-900 text-[10px] font-semibold">Đề xuất mới</span>
+</div>
+</td>
+</tr>
+<!-- Dòng 2: Ngày tháng năm sinh -->
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">calendar_today</span>
+<span>Ngày tháng năm sinh</span>
+</td>
+<td class="py-3.5 px-4 text-slate-500 font-mono">
+                      04/12/1994
+                    </td>
+<td class="py-3.5 px-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 border border-blue-200 text-[#004385] font-bold text-xs">
+<span class="material-symbols-outlined text-[16px] text-[#004385]">update</span>
+<span>04/12/1995</span>
+<span class="text-[11px] font-normal text-slate-500">(Đính chính theo khai sinh gốc)</span>
+</div>
+</td>
+</tr>
+<!-- Dòng 3: Nơi cấp CCCD -->
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-3.5 px-4 font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">location_on</span>
+<span>Nơi cấp CCCD</span>
+</td>
+<td class="py-3.5 px-4 text-slate-500">
+                      Cục CS QLHC về TTXH
+                    </td>
+<td class="py-3.5 px-4">
+<span class="text-slate-800 font-medium">Cục Cảnh sát QLHC về TTXH</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Card 3: Tệp minh chứng đính kèm -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+<div class="flex items-center justify-between pb-4 border-b border-slate-100">
+<h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-[#004385] text-[20px]">attach_file</span>
+                Tệp minh chứng đính kèm
+              </h3>
+<span class="text-xs text-slate-400 font-medium">1 tệp tin hợp lệ</span>
+</div>
+<div class="mt-4 p-4 rounded-xl bg-[#F8F9FC] border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 leading-tight">Bản scan 2 mặt CCCD gắn chip</span>
+<div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
+<span class="font-mono">CCCD_LeThiMaiAnh_Scan.pdf</span>
+<span>•</span>
+<span>2.4 MB</span>
+<span>•</span>
+<span class="text-emerald-600 font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">verified_user</span> Đã quét an toàn
+                    </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900 text-xs font-semibold transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Xem trực tuyến</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#004385] text-white hover:bg-blue-900 text-xs font-semibold transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Tải về</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- CỘT PHẢI (Khoảng 4/12 - ~35%) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Card 1: Lịch sử xử lý dạng Timeline -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+<div class="flex items-center gap-2.5 pb-4 border-b border-slate-100">
+<span class="material-symbols-outlined text-[#004385] text-[20px]">history</span>
+<h3 class="text-base font-bold text-slate-800">Lịch sử xử lý</h3>
+</div>
+<!-- Timeline -->
+<div class="relative pl-6 flex flex-col gap-6 mt-4">
+<!-- Đường kẻ đứng -->
+<div class="absolute left-2.5 top-2 bottom-2 w-0.5 bg-slate-200"></div>
+<!-- Bước 1 -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center ring-4 ring-white shadow-xs">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-800">Cán bộ khởi tạo phiếu yêu cầu</span>
+</div>
+<span class="text-[11px] font-mono text-slate-400 mt-0.5">15/09/2026 09:15</span>
+<p class="text-xs text-slate-500 mt-1">Cán bộ Lê Thị Mai Anh gửi hồ sơ kèm bản scan đính kèm qua cổng nhân sự.</p>
+</div>
+</div>
+<!-- Bước 2 -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1 w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center ring-4 ring-white shadow-xs">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-800">Trưởng phòng QLĐT xác nhận đối chiếu văn bản</span>
+</div>
+<span class="text-[11px] font-mono text-slate-400 mt-0.5">15/09/2026 10:30</span>
+<p class="text-xs text-slate-500 mt-1">Đã ký nháy duyệt đề xuất thông tin nội bộ đơn vị.</p>
+</div>
+</div>
+<!-- Bước 3 (Hiện tại) -->
+<div class="relative flex items-start gap-3">
+<div class="absolute -left-6 top-1 w-5 h-5 rounded-full bg-[#F37021] text-white flex items-center justify-center ring-4 ring-white shadow-xs">
+<span class="material-symbols-outlined text-[12px]">pending</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-[#F37021]">Chuyển Ban Quản trị CSDL &amp; Admin duyệt cập nhật</span>
+<span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px]">Hiện tại</span>
+</div>
+<span class="text-[11px] font-mono text-slate-400 mt-0.5">15/09/2026 14:00</span>
+<p class="text-xs text-slate-600 mt-1">Đang chờ Super Admin phê duyệt cập nhật vào CSDL máy chủ chính thức.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Khu vực xử lý & Phê duyệt của Admin -->
+<div class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
+<div class="flex items-center gap-2.5 pb-4 border-b border-slate-100">
+<span class="material-symbols-outlined text-[#004385] text-[20px]">admin_panel_settings</span>
+<div>
+<h3 class="text-base font-bold text-slate-800">Xử lý phiếu yêu cầu</h3>
+<p class="text-xs text-slate-500">Tác vụ quyết định của Quản trị viên</p>
+</div>
+</div>
+<form class="mt-4 flex flex-col gap-4" onsubmit="return false;">
+<!-- Ô ghi chú Admin -->
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1.5" for="admin-notes">
+                  Ghi chú của Admin <span class="text-rose-600">*</span>
+</label>
+<textarea class="w-full p-3 rounded-lg border border-slate-200 bg-[#F8F9FC] text-slate-800 text-xs leading-relaxed focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#004385]/20 focus:border-[#004385] transition-all resize-none" id="admin-notes" placeholder="Nhập ý kiến phê duyệt hoặc lý do từ chối..." rows="3">Đã đối chiếu với bản scan CCCD gắn chip hợp lệ. Phê duyệt đồng bộ CSDL nhân sự HUIT.</textarea>
+</div>
+<!-- Checkbox: Tự động ghi đè -->
+<label class="flex items-start gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 mt-0.5 text-[#004385] rounded border-slate-300 focus:ring-[#004385]" type="checkbox"/>
+<span class="text-xs text-slate-700 font-medium leading-tight">
+                  Tự động ghi đè và cập nhật thông tin hồ sơ nhân viên trong CSDL
+                </span>
+</label>
+<!-- Cảnh báo khóa vĩnh viễn -->
+<div class="p-3 rounded-xl bg-amber-50 border border-amber-200/80 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-amber-600 text-[18px] flex-shrink-0 mt-0.5">info</span>
+<p class="text-[11px] text-amber-900 leading-relaxed">
+<strong>Lưu ý:</strong> Phiếu sau khi bấm "Hoàn thành" hoặc "Từ chối" sẽ được khóa vĩnh viễn, không thể xử lý lại lần hai.
+                </p>
+</div>
+<!-- Hàng nút hành động -->
+<div class="flex items-center gap-3 pt-2">
+<button class="w-1/3 py-2.5 px-4 rounded-lg border border-rose-300 text-rose-600 hover:bg-rose-50 text-sm font-medium transition-colors text-center" type="button">
+                  Từ chối
+                </button>
+<button class="w-2/3 py-2.5 px-5 rounded-lg bg-[#004385] hover:bg-blue-900 text-white text-sm font-medium shadow-sm transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Hoàn thành &amp; Phê duyệt</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div aria-hidden="true" data-snapdom-sandbox="true" id="snapdom-sandbox" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div><div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden relative flex flex-col">
+<!-- Nút đóng (x) góc phải -->
+<button aria-label="Đóng modal" class="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors flex items-center justify-center cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<div class="p-6 flex flex-col gap-5">
+<!-- Header Modal -->
+<div class="flex items-start gap-4 pr-6"><div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 border border-rose-300 flex items-center justify-center flex-shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[26px] font-bold">error</span>
+</div>
+<div class="flex flex-col">
+<h3 class="text-lg font-bold text-slate-900 leading-snug">Từ chối phiếu yêu cầu?</h3>
+<p class="text-sm text-slate-500 mt-0.5 leading-relaxed">Yêu cầu thay đổi sẽ bị bác bỏ và thông báo tới người gửi.</p>
+</div></div>
+<!-- Khối tóm tắt thông tin phiếu -->
+<div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 flex flex-col gap-2.5 text-sm">
+<div class="flex items-center justify-between gap-2 pb-2 border-b border-slate-200/70">
+<span class="text-slate-500 font-medium">Mã phiếu yêu cầu:</span>
+<span class="px-2.5 py-0.5 rounded-lg bg-[#004385]/10 text-[#004385] font-bold font-mono text-sm border border-[#004385]/20">#PYC-2026-087</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="text-slate-500 font-medium text-xs uppercase tracking-wider">Cán bộ yêu cầu:</span>
+<div class="text-slate-800 font-semibold">Lê Thị Mai Anh <span class="text-slate-500 font-normal">(NV-HUIT-2024-090 • Phòng Quản lý Đào tạo)</span></div>
+</div>
+<div class="flex flex-col gap-0.5 pt-1">
+<span class="text-slate-500 font-medium text-xs uppercase tracking-wider">Loại yêu cầu:</span>
+<div class="text-slate-800 font-medium text-sm">Cập nhật số CCCD gắn chip và ngày sinh trong CSDL</div>
+</div>
+</div>
+<!-- Khối Ghi chú Admin đã nhập -->
+<div class="flex flex-col gap-1.5"><label class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5" for="modal-reject-reason">
+<span class="material-symbols-outlined text-[16px] text-slate-500">edit_note</span>
+<span>Lý do từ chối <span class="text-red-600">*</span></span>
+</label>
+<textarea class="w-full p-3 rounded-xl border border-slate-200 bg-[#F8F9FC] text-slate-800 text-sm leading-relaxed focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#004385]/20 focus:border-[#004385] transition-all resize-none" id="modal-reject-reason" placeholder="Nhập chi tiết lý do từ chối duyệt phiếu (ví dụ: Tệp đính kèm không rõ nét, thiếu thông tin chứng thực...)..." rows="3"></textarea>
+<span class="text-xs text-slate-500 mt-0.5 leading-relaxed">Lý do này sẽ được gửi kèm thông báo qua email và hiển thị trên tài khoản của cán bộ yêu cầu.</span></div>
+<!-- Khung cảnh báo ngắn -->
+<div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200/80 flex items-start gap-2.5"><span class="material-symbols-outlined text-amber-600 text-[18px] flex-shrink-0 mt-0.5">warning</span>
+<p class="text-xs text-amber-900 leading-relaxed font-medium">
+<strong class="font-bold">Lưu ý:</strong> Hồ sơ và dữ liệu gốc sẽ không được thay đổi. Phiếu sẽ chuyển sang trạng thái "Đã từ chối" và kết thúc quy trình xử lý.
+</p></div>
+</div>
+<!-- Footer hành động -->
+<div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-end gap-3">
+<button class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-medium text-sm transition-colors cursor-pointer" type="button">
+        Quay lại
+      </button>
+<button class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-rose-50 hover:text-slate-900 text-white font-medium text-sm shadow transition-all flex items-center gap-2 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Xác nhận từ chối</span>
+</button>
+</div>
+</div>
+</div></body></html>

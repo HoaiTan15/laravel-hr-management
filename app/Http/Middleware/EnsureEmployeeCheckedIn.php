@@ -14,7 +14,7 @@ class EnsureEmployeeCheckedIn
     {
         $user = $request->user();
 
-        if (! $user || $user->role !== UserRole::EMPLOYEE) {
+        if (! $user || ! in_array($user->role, [UserRole::HR, UserRole::EMPLOYEE], true)) {
             return $next($request);
         }
 

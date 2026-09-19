@@ -1,0 +1,590 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"tertiary-fixed-dim":"#93ccff","surface-container-highest":"#d3e4fe","error":"#ba1a1a","surface-variant":"#d3e4fe","on-tertiary":"#ffffff","on-surface-variant":"#424750","secondary-container":"#fc7728","inverse-on-surface":"#eaf1ff","secondary":"#a04100","surface-tint":"#2d5ea2","surface-container":"#e5eeff","primary-fixed-dim":"#a8c8ff","secondary-fixed":"#ffdbcb","outline":"#737782","primary-fixed":"#d6e3ff","on-secondary":"#ffffff","on-secondary-container":"#5d2300","surface-container-high":"#dce9ff","primary":"#002d5d","on-surface":"#0b1c30","surface-bright":"#f8f9ff","surface-container-low":"#eff4ff","inverse-primary":"#a8c8ff","on-primary-fixed-variant":"#074688","surface-container-lowest":"#ffffff","on-secondary-fixed-variant":"#7a3000","outline-variant":"#c3c6d2","surface-dim":"#cbdbf5","on-primary":"#ffffff","tertiary-container":"#00476e","on-primary-container":"#85b2fb","on-tertiary-container":"#5bb8fe","secondary-fixed-dim":"#ffb693","inverse-surface":"#213145","tertiary":"#00304c","error-container":"#ffdad6","on-secondary-fixed":"#341000","tertiary-fixed":"#cce5ff","surface":"#f8f9ff","on-error-container":"#93000a","on-tertiary-fixed":"#001d31","on-background":"#0b1c30","on-tertiary-fixed-variant":"#004b73","primary-container":"#004385","on-error":"#ffffff","on-primary-fixed":"#001b3d","background":"#f8f9ff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2rem","space-lg":"1.25rem","margin-desktop":"2rem","gutter":"1rem","space-xs":"0.25rem","space-sm":"0.5rem","margin":"1rem","space-md":"0.75rem","gutter-desktop":"1.5rem"},"fontFamily":{"label-md":["Inter"],"headline-lg":["Inter"],"title-md":["Inter"],"headline-xl":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"title-sm":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"caption":["Inter"],"headline-xl-mobile":["Inter"],"label-sm":["Inter"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.015em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"title-sm":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"headline-lg-mobile":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"caption":["11px",{"lineHeight":"14px","fontWeight":"400"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-md bg-primary text-on-primary"><div class="w-9 h-9 rounded-lg bg-surface-container-lowest flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-primary text-[22px]">school</span></div><div class="flex flex-col"><span class="font-title-sm text-title-sm text-on-primary leading-tight tracking-tight">HUIT HRMS</span><span class="font-caption text-caption text-surface-container-highest tracking-wide uppercase">ĐH Công Thương TP.HCM</span></div></div><nav class="flex flex-col gap-space-xs px-space-md py-space-lg" data-active-classes="bg-primary-container text-on-primary font-title-sm rounded-lg"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-md text-body-md">Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="task-list" href="#"><span class="material-symbols-outlined text-[20px]">checklist</span><span class="font-body-md text-body-md">Danh sách công việc</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm transition-colors bg-primary-container text-on-primary font-title-sm rounded-lg" data-path="employee-management" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span class="font-body-md text-body-md">Quản lý nhân viên</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="department-management" href="#"><span class="material-symbols-outlined text-[20px]">corporate_fare</span><span class="font-body-md text-body-md">Quản lý phòng ban</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="attendance-management" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-body-md text-body-md">Quản lý chấm công</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="recruitment-and-offboarding" href="#"><span class="material-symbols-outlined text-[20px]">person_search</span><span class="font-body-md text-body-md">Tuyển dụng &amp; thôi việc</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="request-vouchers" href="#"><span class="material-symbols-outlined text-[20px]">assignment</span><span class="font-body-md text-body-md">Phiếu yêu cầu</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="personal-dossier" href="#"><span class="material-symbols-outlined text-[20px]">account_box</span><span class="font-body-md text-body-md">Hồ sơ cá nhân</span></a></nav></div><div class="p-space-md bg-surface-container-low m-space-md rounded-lg flex flex-col gap-space-sm shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-xs text-on-surface-variant"><span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Cổng viên chức HUIT</span></div><p class="font-caption text-caption text-on-surface-variant">Phiên làm việc bảo mật</p><a class="flex items-center justify-center gap-space-xs py-space-xs px-space-sm rounded bg-surface-container-lowest text-error hover:bg-error-container hover:text-on-error-container transition-colors font-label-md text-label-md" data-path="login" href="#"><span class="material-symbols-outlined text-[16px]">logout</span><span>Đăng xuất</span></a></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter-desktop"><div class="flex items-center gap-space-md"><span class="font-headline-sm text-headline-sm text-primary uppercase tracking-tight">CỔNG NHÂN SỰ | ĐẠI HỌC CÔNG THƯƠNG TP.HCM</span></div><div class="flex items-center gap-space-lg"><button class="relative w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors shadow-[0_1px_8px_rgba(0,0,0,0.04)]" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary-container ring-2 ring-surface-container-lowest"></span></button><div class="flex items-center gap-space-md pl-space-sm"><div class="flex flex-col text-right"><span class="font-title-sm text-title-sm text-on-surface leading-tight">Nguyễn Văn An</span><span class="font-caption text-caption text-on-surface-variant">HR Specialist / Employee</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full px-gutter-desktop pt-16 bg-surface"><div class="flex flex-col w-full pb-space-xl">
+<!-- Top Navigation & Breadcrumbs -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md pt-space-md mb-space-lg">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
+<a class="flex items-center gap-1 hover:text-primary transition-colors" data-path="dashboard" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span>
+<span>Trang chủ</span>
+</a>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface-variant">Quản lý nhân sự</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-semibold">Danh sách nhân viên</span>
+</div>
+<!-- Quick System Notice Pill -->
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-high rounded-full self-start sm:self-auto">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Hệ thống đồng bộ dữ liệu: Hôm nay 09:30</span>
+</div>
+</div>
+<!-- Primary Page Header with Actions -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg mb-space-xl">
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Danh sách nhân viên</h1>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm">HUIT HR Hub</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Quản lý hồ sơ công chức, viên chức và hợp đồng lao động tại Trường ĐH Công Thương TP.HCM.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md h-10 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">download</span>
+<span>Xuất Excel</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md h-10 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+<span>Tùy chỉnh cột</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-lg h-10 rounded-lg bg-primary-container text-on-primary font-title-sm text-title-sm shadow-md hover:bg-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>+ Thêm nhân viên mới</span>
+</button>
+</div>
+</div>
+<!-- KPI Statistical Metrics Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-gutter-desktop mb-space-xl">
+<!-- Total Personnel -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tổng nhân sự</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">128</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Cán bộ - NV</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">groups</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-on-surface-variant font-caption text-caption">
+<span class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[14px]">domain</span>
+<span>14 Đơn vị trực thuộc</span>
+</span>
+<span class="font-semibold text-secondary">+2 trong quý này</span>
+</div>
+</div>
+<!-- Full-time / Active -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Đang làm việc</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">120</span>
+<span class="font-label-md text-label-md text-primary font-semibold">(93.8%)</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center gap-1.5 text-on-surface-variant font-caption text-caption">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Hợp đồng chính thức &amp; Biên chế HUIT</span>
+</div>
+</div>
+<!-- Probationary -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Thử việc</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-xl text-headline-xl text-secondary-container font-bold">05</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Giảng viên / CV</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">hourglass_top</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-on-surface-variant font-caption text-caption">
+<span class="text-secondary font-medium">Đang theo dõi đánh giá</span>
+<span>Kỳ T06/2025</span>
+</div>
+</div>
+<!-- Suspended / Leave -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tạm ngưng / Nghỉ thai sản</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-headline-xl text-headline-xl text-on-surface-variant font-bold">03</span>
+<span class="font-label-md text-label-md text-error">1 vô hiệu hóa</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">pause_circle</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center gap-1.5 text-on-surface-variant font-caption text-caption">
+<span class="material-symbols-outlined text-[15px] text-error">lock_reset</span>
+<span>Yêu cầu xác nhận qua PYC</span>
+</div>
+</div>
+</div>
+<!-- Search and Filter Control Deck -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-lg flex flex-col lg:flex-row gap-space-md items-stretch lg:items-center justify-between">
+<!-- Search Bar -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-outline">search</span>
+<input class="w-full h-10 pl-10 pr-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="employeeSearch" placeholder="Tìm kiếm theo mã NV hoặc họ tên cán bộ..." type="text">
+</div>
+<!-- Filter Dropdowns & Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Department Filter -->
+<div class="relative min-w-[210px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">corporate_fare</span>
+<select class="w-full h-10 pl-9 pr-8 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none cursor-pointer">
+<option value="">Tất cả phòng ban</option>
+<option value="cntt">Khoa Công nghệ thông tin</option>
+<option value="tchc">Phòng Tổ chức - Hành chính</option>
+<option value="dt">Phòng Đào tạo</option>
+<option value="khtc">Phòng Kế hoạch - Tài chính</option>
+<option value="qttb">Phòng Quản trị - Thiết bị</option>
+<option value="khcn">Phòng Quản lý Khoa học &amp; Công nghệ</option>
+<option value="ctsv">Phòng Công tác Sinh viên</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+<!-- Status Filter -->
+<div class="relative min-w-[170px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline">filter_alt</span>
+<select class="w-full h-10 pl-9 pr-8 bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none cursor-pointer">
+<option value="">Tất cả trạng thái</option>
+<option value="active">Chính thức</option>
+<option value="probation">Thử việc</option>
+<option value="disabled">Tạm ngưng / Vô hiệu hóa</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+<!-- Filter CTA Button -->
+<button class="inline-flex items-center gap-1 px-space-md h-10 rounded-lg bg-primary-container text-on-primary font-title-sm text-title-sm hover:bg-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<span>Lọc</span>
+</button>
+<!-- Reset CTA Button -->
+<button class="inline-flex items-center gap-1 px-space-md h-10 rounded-lg bg-surface-container-high text-on-surface-variant font-title-sm text-title-sm hover:bg-surface-container-highest hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Đặt lại</span>
+</button>
+</div>
+</div>
+<!-- Standard Master-Detail Data Table Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-space-md flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<!-- Table Header -->
+<thead>
+<tr class="bg-surface-container-low h-11 text-on-surface-variant font-label-md text-label-md">
+<th class="px-space-md py-2 w-12 text-center">
+<input class="rounded text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" type="checkbox">
+</th>
+<th class="px-space-md py-2 tracking-wide uppercase">Mã NV</th>
+<th class="px-space-md py-2 tracking-wide uppercase">Họ tên &amp; Học vị</th>
+<th class="px-space-md py-2 tracking-wide uppercase">Phòng ban / Đơn vị</th>
+<th class="px-space-md py-2 tracking-wide uppercase">Chức vụ</th>
+<th class="px-space-md py-2 tracking-wide uppercase">Ngày vào làm</th>
+<th class="px-space-md py-2 tracking-wide uppercase">Trạng thái</th>
+<th class="px-space-md py-2 text-right tracking-wide uppercase">Thao tác</th>
+</tr>
+</thead>
+<!-- Table Body -->
+<tbody class="divide-y divide-surface-container font-body-sm text-body-sm text-on-surface">
+<!-- Row 1: NV-HUIT-2024-089 (Active) -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-space-md py-3 text-center">
+<input class="rounded text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-space-md py-3 font-mono font-semibold text-primary">
+<a class="hover:underline flex items-center gap-1" data-path="personal-dossier" href="#">
+<span>NV-HUIT-2024-089</span>
+</a>
+</td>
+<td class="px-space-md py-3">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-title-sm text-title-sm shrink-0">
+                  NA
+                </div>
+<div class="flex flex-col min-w-0">
+<a class="font-title-sm text-title-sm text-on-surface hover:text-primary transition-colors truncate" data-path="personal-dossier" href="#">
+                    Nguyễn Văn An
+                  </a>
+<span class="font-caption text-caption text-on-surface-variant truncate">an.nv@huit.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-3 font-body-md text-body-md text-on-surface">
+              Khoa Công nghệ thông tin
+            </td>
+<td class="px-space-md py-3">
+<div class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                Chuyên viên CNTT
+              </div>
+</td>
+<td class="px-space-md py-3 font-mono text-on-surface-variant">
+              01/08/2022
+            </td>
+<td class="px-space-md py-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Đang làm việc</span>
+</span>
+</td>
+<td class="px-space-md py-3 text-right">
+<div class="inline-flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Xem chi tiết hồ sơ" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Chỉnh sửa thông tin" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-error hover:bg-error-container transition-colors" onclick="openDisableRequestModal('NV-HUIT-2024-089', 'Nguyễn Văn An')" title="Yêu cầu vô hiệu hóa / Xóa" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: NV-HUIT-2023-014 (Active - Leader) -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-space-md py-3 text-center">
+<input class="rounded text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-space-md py-3 font-mono font-semibold text-primary">
+<a class="hover:underline flex items-center gap-1" data-path="personal-dossier" href="#">
+<span>NV-HUIT-2023-014</span>
+</a>
+</td>
+<td class="px-space-md py-3">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-surface-container text-primary flex items-center justify-center font-title-sm text-title-sm shrink-0">
+                  LN
+                </div>
+<div class="flex flex-col min-w-0">
+<a class="font-title-sm text-title-sm text-on-surface hover:text-primary transition-colors truncate" data-path="personal-dossier" href="#">
+                    TS. Lê Hoàng Nam
+                  </a>
+<span class="font-caption text-caption text-on-surface-variant truncate">nam.lh@huit.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-3 font-body-md text-body-md text-on-surface">
+              Khoa Công nghệ thông tin
+            </td>
+<td class="px-space-md py-3">
+<div class="inline-flex items-center px-2 py-0.5 rounded bg-primary-fixed text-primary font-label-sm text-label-sm font-semibold">
+                Trưởng khoa
+              </div>
+</td>
+<td class="px-space-md py-3 font-mono text-on-surface-variant">
+              15/02/2018
+            </td>
+<td class="px-space-md py-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Đang làm việc</span>
+</span>
+</td>
+<td class="px-space-md py-3 text-right">
+<div class="inline-flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Xem chi tiết hồ sơ" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Chỉnh sửa thông tin" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-error hover:bg-error-container transition-colors" onclick="openDisableRequestModal('NV-HUIT-2023-014', 'TS. Lê Hoàng Nam')" title="Yêu cầu vô hiệu hóa / Xóa" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: NV-HUIT-2025-102 (Probationary) -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-space-md py-3 text-center">
+<input class="rounded text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-space-md py-3 font-mono font-semibold text-primary">
+<a class="hover:underline flex items-center gap-1" data-path="personal-dossier" href="#">
+<span>NV-HUIT-2025-102</span>
+</a>
+</td>
+<td class="px-space-md py-3">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center font-title-sm text-title-sm shrink-0">
+                  TH
+                </div>
+<div class="flex flex-col min-w-0">
+<a class="font-title-sm text-title-sm text-on-surface hover:text-primary transition-colors truncate" data-path="personal-dossier" href="#">
+                    Trần Thị Thu Hà
+                  </a>
+<span class="font-caption text-caption text-on-surface-variant truncate">ha.ttt@huit.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-3 font-body-md text-body-md text-on-surface">
+              Phòng Tổ chức - Hành chính
+            </td>
+<td class="px-space-md py-3">
+<div class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                Chuyên viên Nhân sự
+              </div>
+</td>
+<td class="px-space-md py-3 font-mono text-on-surface-variant">
+              10/06/2025
+            </td>
+<td class="px-space-md py-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-fixed text-secondary font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Thử việc</span>
+</span>
+</td>
+<td class="px-space-md py-3 text-right">
+<div class="inline-flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Xem chi tiết hồ sơ" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Chỉnh sửa thông tin" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-error hover:bg-error-container transition-colors" onclick="openDisableRequestModal('NV-HUIT-2025-102', 'Trần Thị Thu Hà')" title="Yêu cầu vô hiệu hóa / Xóa" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: NV-HUIT-2022-045 (Active) -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-space-md py-3 text-center">
+<input class="rounded text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-space-md py-3 font-mono font-semibold text-primary">
+<a class="hover:underline flex items-center gap-1" data-path="personal-dossier" href="#">
+<span>NV-HUIT-2022-045</span>
+</a>
+</td>
+<td class="px-space-md py-3">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-title-sm text-title-sm shrink-0">
+                  TT
+                </div>
+<div class="flex flex-col min-w-0">
+<a class="font-title-sm text-title-sm text-on-surface hover:text-primary transition-colors truncate" data-path="personal-dossier" href="#">
+                    ThS. Nguyễn Trọng Toàn
+                  </a>
+<span class="font-caption text-caption text-on-surface-variant truncate">toan.nt@huit.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-3 font-body-md text-body-md text-on-surface">
+              Phòng Quản trị - Thiết bị
+            </td>
+<td class="px-space-md py-3">
+<div class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                Chuyên viên thiết bị
+              </div>
+</td>
+<td class="px-space-md py-3 font-mono text-on-surface-variant">
+              05/09/2022
+            </td>
+<td class="px-space-md py-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Đang làm việc</span>
+</span>
+</td>
+<td class="px-space-md py-3 text-right">
+<div class="inline-flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Xem chi tiết hồ sơ" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-secondary transition-colors" title="Chỉnh sửa thông tin" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-error hover:bg-error-container transition-colors" onclick="openDisableRequestModal('NV-HUIT-2022-045', 'ThS. Nguyễn Trọng Toàn')" title="Yêu cầu vô hiệu hóa / Xóa" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: NV-HUIT-2021-008 (Disabled/Deactivated) -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group bg-surface-container-low/30">
+<td class="px-space-md py-3 text-center">
+<input class="rounded text-primary-container focus:ring-primary-container w-4 h-4 cursor-pointer" type="checkbox">
+</td>
+<td class="px-space-md py-3 font-mono font-semibold text-outline">
+<a class="hover:underline flex items-center gap-1" data-path="personal-dossier" href="#">
+<span>NV-HUIT-2021-008</span>
+</a>
+</td>
+<td class="px-space-md py-3">
+<div class="flex items-center gap-space-sm opacity-80">
+<div class="w-9 h-9 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-title-sm text-title-sm shrink-0">
+                  PT
+                </div>
+<div class="flex flex-col min-w-0">
+<a class="font-title-sm text-title-sm text-on-surface-variant hover:text-primary transition-colors truncate" data-path="personal-dossier" href="#">
+                    Phạm Minh Trí
+                  </a>
+<span class="font-caption text-caption text-outline truncate">tri.pm@huit.edu.vn</span>
+</div>
+</div>
+</td>
+<td class="px-space-md py-3 font-body-md text-body-md text-on-surface-variant">
+              Phòng Kế hoạch - Tài chính
+            </td>
+<td class="px-space-md py-3">
+<div class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-outline font-label-sm text-label-sm">
+                Kế toán viên
+              </div>
+</td>
+<td class="px-space-md py-3 font-mono text-outline">
+              12/03/2021
+            </td>
+<td class="px-space-md py-3">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>Vô hiệu hóa</span>
+</span>
+</td>
+<td class="px-space-md py-3 text-right">
+<div class="inline-flex items-center justify-end gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-primary transition-colors" title="Xem chi tiết hồ sơ" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Lịch sử phiếu vô hiệu" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline-variant cursor-not-allowed" disabled="" title="Hồ sơ đã vô hiệu" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Summary Bar -->
+<div class="px-space-lg py-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Hiển thị <span class="font-semibold text-on-surface">1 - 5</span> trong tổng số <span class="font-semibold text-primary">128</span> nhân sự
+        </span>
+<div class="hidden md:flex items-center gap-1 text-on-surface-variant font-caption text-caption">
+<span>Số hàng mỗi trang:</span>
+<select class="h-7 bg-surface-container-lowest text-on-surface font-label-sm text-label-sm rounded px-1.5 focus:outline-none">
+<option>5</option>
+<option selected="">10</option>
+<option>20</option>
+<option>50</option>
+</select>
+</div>
+</div>
+<!-- Pagination Navigation Buttons -->
+<div class="inline-flex items-center gap-1">
+<button class="px-3 h-8 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface font-title-sm text-title-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="" type="button">
+          Trước
+        </button>
+<button class="w-8 h-8 rounded bg-primary-container text-on-primary font-title-sm text-title-sm transition-all shadow-sm" type="button">
+          1
+        </button>
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface font-title-sm text-title-sm transition-colors" type="button">
+          2
+        </button>
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface font-title-sm text-title-sm transition-colors" type="button">
+          3
+        </button>
+<span class="w-6 text-center text-outline">...</span>
+<button class="w-8 h-8 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface font-title-sm text-title-sm transition-colors" type="button">
+          26
+        </button>
+<button class="px-3 h-8 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface font-title-sm text-title-sm transition-colors" type="button">
+          Sau
+        </button>
+</div>
+</div>
+</div>
+<!-- Business Rule Guideline Banner (Institutional Directive) -->
+<div class="bg-surface-container-high rounded-xl p-space-md shadow-sm flex items-start gap-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">policy</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs font-title-sm text-title-sm text-primary">
+<span>Quy định nghiệp vụ quản lý nhân sự HUIT</span>
+<span class="text-secondary">• Bảo mật &amp; Thẩm quyền</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        HR có quyền thêm, cập nhật hồ sơ và điều chuyển đơn vị; thao tác <strong class="text-error font-medium">xóa nhân sự</strong> bắt buộc phải thực hiện quy trình vô hiệu hóa tài khoản và gửi Phiếu yêu cầu (PYC) cho <strong class="text-on-surface font-medium">Super Admin / Ban Giám Hiệu</strong> phê duyệt trước khi hồ sơ chính thức lưu trữ bảo mật.
+      </p>
+</div>
+</div>
+<!-- Interactive Slide-in / Modal for Action Confirmation (PYC Request) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden flex items-center justify-center p-space-md" id="disableModal">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-xl overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="p-space-lg flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">warning</span>
+</div>
+<div class="flex-1">
+<h3 class="font-title-md text-title-md text-on-surface">Khởi tạo Phiếu yêu cầu Vô hiệu hóa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Theo chính sách nhân sự HUIT, việc chấm dứt hợp đồng/vô hiệu hóa cần được chuyển đến Super Admin. Bạn đang thao tác cho cán bộ:
+          </p>
+<div class="my-space-sm p-space-sm bg-surface-container rounded font-mono text-body-sm text-primary font-semibold flex items-center justify-between">
+<span id="targetEmpName">Nguyễn Văn An</span>
+<span class="text-on-surface-variant font-normal" id="targetEmpCode">NV-HUIT-2024-089</span>
+</div>
+<div class="mt-space-md">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Lý do khởi tạo yêu cầu</label>
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container" placeholder="Ví dụ: Chấm dứt hợp đồng lao động theo nguyện vọng, chuyển công tác ngoài trường..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<div class="px-space-lg py-space-md bg-surface-container flex items-center justify-end gap-space-sm">
+<button class="px-space-md h-10 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm hover:bg-surface-container-high transition-colors" onclick="closeDisableRequestModal()" type="button">
+          Hủy bỏ
+        </button>
+<button class="px-space-lg h-10 rounded-lg bg-error text-on-error font-title-sm text-title-sm shadow hover:bg-error/90 transition-colors flex items-center gap-1.5" onclick="submitRequest()" type="button">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Gửi PYC đến Super Admin</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function openDisableRequestModal(empCode, empName) {
+    const modal = document.getElementById('disableModal');
+    const codeSpan = document.getElementById('targetEmpCode');
+    const nameSpan = document.getElementById('targetEmpName');
+    
+    if (codeSpan) codeSpan.textContent = empCode;
+    if (nameSpan) nameSpan.textContent = empName;
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function closeDisableRequestModal() {
+    const modal = document.getElementById('disableModal');
+    if (modal) modal.classList.add('hidden');
+  }
+
+  function submitRequest() {
+    alert('Phiếu yêu cầu vô hiệu hóa hồ sơ đã được gửi thành công đến Ban Giám hiệu / Super Admin.');
+    closeDisableRequestModal();
+  }
+
+  // Live filter simulation for rapid user experience
+  const searchInput = document.getElementById('employeeSearch');
+  if (searchInput) {
+    searchInput.addEventListener('keyup', function(e) {
+      const term = e.target.value.toLowerCase();
+      const tableRows = document.querySelectorAll('tbody tr');
+      tableRows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+  }
+</script></main></div></body></html>

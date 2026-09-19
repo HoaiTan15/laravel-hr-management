@@ -77,7 +77,7 @@ class AuthAndRoleTest extends TestCase
 
     public function test_logout_invalidates_the_session(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => UserRole::ADMIN]);
 
         $this->actingAs($user)->post(route('logout'))
             ->assertRedirect(route('login'));
@@ -94,12 +94,12 @@ class AuthAndRoleTest extends TestCase
     public function test_roles_can_access_only_their_landing_area(): void
     {
         $admin = User::factory()->create(['role' => UserRole::ADMIN]);
-        $hr = User::factory()->create(['role' => UserRole::HR]);
+        $hr = $this->createEmployee(UserRole::HR);
 
         $this->actingAs($admin)->get(route('admin.home'))->assertOk();
         $this->actingAs($admin)->get(route('hr.home'))->assertForbidden();
-        $this->actingAs($hr)->get(route('hr.home'))->assertOk();
-        $this->actingAs($hr)->get(route('admin.home'))->assertForbidden();
+        $this->actingAs($hr->user)->get(route('hr.home'))->assertRedirect(route('attendance.check-in'));
+        $this->actingAs($hr->user)->get(route('admin.home'))->assertForbidden();
     }
 
     public function test_employee_is_redirected_until_they_have_checked_in(): void
@@ -130,13 +130,20 @@ class AuthAndRoleTest extends TestCase
             ->assertOk();
     }
 
-    public function test_admin_and_hr_are_not_subject_to_employee_check_in_gate(): void
+    public function test_admin_is_not_subject_to_employee_check_in_gate(): void
     {
         $admin = User::factory()->create(['role' => UserRole::ADMIN]);
-        $hr = User::factory()->create(['role' => UserRole::HR]);
 
         $this->actingAs($admin)->get(route('admin.home'))->assertOk();
-        $this->actingAs($hr)->get(route('hr.home'))->assertOk();
+    }
+
+    public function test_hr_is_redirected_until_they_have_checked_in(): void
+    {
+        $hr = $this->createEmployee(UserRole::HR);
+
+        $this->actingAs($hr->user)
+            ->get(route('hr.home'))
+            ->assertRedirect(route('attendance.check-in'));
     }
 
     public function test_inactive_authenticated_user_is_logged_out(): void
@@ -153,11 +160,11 @@ class AuthAndRoleTest extends TestCase
         $this->assertGuest();
     }
 
-    private function createEmployee(): Employee
+    private function createEmployee(UserRole $role = UserRole::EMPLOYEE): Employee
     {
         $department = Department::create(['name' => fake()->unique()->company]);
         $position = Position::create(['name' => fake()->unique()->jobTitle]);
-        $user = User::factory()->create(['role' => UserRole::EMPLOYEE]);
+        $user = User::factory()->create(['role' => $role]);
 
         return Employee::create([
             'user_id' => $user->id,

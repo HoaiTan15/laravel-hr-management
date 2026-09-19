@@ -67,7 +67,7 @@ Không ghi mật khẩu thật vào source hoặc `.env.example`.
 php artisan migrate --seed
 ```
 
-Tài khoản demo (mật khẩu dùng chung: `demo-password`):
+Tài khoản demo (mật khẩu dùng chung: `10giokem7`):
 
 - `admin@example.test` — Admin
 - `hr@example.test` — HR

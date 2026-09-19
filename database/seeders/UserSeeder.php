@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 ['email' => $account['email']],
                 [
                     'name' => $account['name'],
-                    'password' => Hash::make('demo-password'),
+                    'password' => Hash::make('10giokem7'),
                     'role' => $account['role'],
                     'is_active' => true,
                     'email_verified_at' => now(),

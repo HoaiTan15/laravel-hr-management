@@ -52,7 +52,7 @@ Employees cannot access HR employee, department, position, attendance-management
 - `role`: user role must be one of the roles allowed by the route group.
 - `active.user`: account must be active.
 - `active.employee`: HR/Employee must have an active employment record; terminated employees cannot use employee workspace functions.
-- `checked.in.today`: HR/Employee must have a same-day attendance record with check-in. Admin bypasses this middleware explicitly.
+- `checked.in.today`: HR/Employee must have a same-day attendance record with check-in. Admin bypasses this middleware explicitly. The Attendance phase uses this gate for both HR and Employee workspace routes.
 
 Register aliases in Laravel's middleware configuration and compose middleware at route-group level. Keep `checked.in.today` off login, logout, check-in, check-out, Admin routes, and any route required to reach the check-in screen.
 
