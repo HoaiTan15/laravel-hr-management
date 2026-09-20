@@ -32,7 +32,7 @@ class AttendanceTest extends TestCase
         $employee = $this->createEmployee();
 
         $this->actingAs($employee->user)->post(route('attendance.check-in.store'), [])
-            ->assertRedirect(route('attendance.check-in'));
+            ->assertRedirect(route('employee.home'));
 
         $this->assertDatabaseCount('attendances', 1);
     }

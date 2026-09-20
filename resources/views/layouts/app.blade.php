@@ -62,7 +62,7 @@
                     <a class="nav-link {{ request()->routeIs('hr.employees') ? 'active' : '' }}" href="{{ route('hr.employees') }}"><span>Nhân viên</span></a>
                     <a class="nav-link {{ request()->routeIs('hr.departments') ? 'active' : '' }}" href="{{ route('hr.departments') }}"><span>Phòng ban</span></a>
                     <a class="nav-link {{ request()->routeIs('hr.positions') ? 'active' : '' }}" href="{{ route('hr.positions') }}"><span>Chức vụ</span></a>
-                    <a class="nav-link {{ request()->routeIs('hr.attendance', 'hr.attendances.*') ? 'active' : '' }}" href="{{ route('hr.attendance') }}"><span>Chấm công</span></a>
+                    <a class="nav-link {{ request()->routeIs('hr.attendance.index', 'hr.attendances.*') ? 'active' : '' }}" href="{{ route('hr.attendance.index') }}"><span>Chấm công</span></a>
                     <a class="nav-link {{ request()->routeIs('hr.tasks') ? 'active' : '' }}" href="{{ route('hr.tasks') }}"><span>Công việc</span></a>
                     <a class="nav-link {{ request()->routeIs('hr.requests') ? 'active' : '' }}" href="{{ route('hr.requests') }}"><span>Phiếu yêu cầu</span></a>
                     <a class="nav-link {{ request()->routeIs('hr.recruitment') ? 'active' : '' }}" href="{{ route('hr.recruitment') }}"><span>Tuyển dụng</span></a>

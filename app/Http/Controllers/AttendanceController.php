@@ -13,8 +13,12 @@ class AttendanceController extends Controller
 {
     public function __construct(private readonly AttendanceService $attendanceService) {}
 
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        if (request()->user()->role->value === 'employee') {
+            return redirect()->route('employee.home');
+        }
+
         return view('attendance.check-in', [
             'attendance' => $this->attendanceService->todayAttendance(request()->user()),
         ]);
@@ -24,11 +28,19 @@ class AttendanceController extends Controller
     {
         $this->attendanceService->checkIn($request->user());
 
+        if ($request->user()->role->value === 'employee') {
+            return redirect()->route('employee.home')->with('attendance_modal', 'checkin-success');
+        }
+
         return redirect()->route('attendance.check-in')->with('success', 'Check-in thành công.');
     }
 
     public function checkoutConfirmation(Request $request): View|RedirectResponse
     {
+        if ($request->user()->role->value === 'employee') {
+            return redirect()->route('employee.home')->with('attendance_modal', 'checkout-confirmation');
+        }
+
         $attendance = $this->attendanceService->todayAttendance($request->user());
 
         if (! $attendance || $attendance->check_out_at !== null) {
@@ -42,6 +54,10 @@ class AttendanceController extends Controller
     {
         $this->attendanceService->checkOut($request->user());
 
-        return redirect()->route('employee.home')->with('checkout_success', true);
+        if ($request->user()->role->value === 'employee') {
+            return redirect()->route('employee.home')->with('attendance_modal', 'checkout-success');
+        }
+
+        return redirect()->route('hr.home')->with('success', 'Check-out thành công.');
     }
 }

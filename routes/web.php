@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminRequestController;
+use App\Http\Controllers\AdminAccountController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceCheckInController;
 use App\Http\Controllers\AttendanceManagementController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\EmployeeRequestController;
 use App\Http\Controllers\EmployeeTaskController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HrManagementController;
 use App\Http\Controllers\HrAttendanceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -41,8 +44,11 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
 
     Route::prefix('admin')->middleware('role:admin')->group(function (): void {
         Route::get('/', [RoleHomeController::class, 'admin'])->name('admin.home');
-        Route::view('/accounts', 'admin.accounts.index')->name('admin.accounts');
-        Route::view('/profile', 'admin.profile.index')->name('admin.profile');
+        Route::get('/accounts', [AdminAccountController::class, 'index'])->name('admin.accounts');
+        Route::post('/accounts', [AdminAccountController::class, 'store'])->name('admin.accounts.store');
+        Route::patch('/accounts/{user}', [AdminAccountController::class, 'update'])->name('admin.accounts.update');
+        Route::get('/profile', [AdminProfileController::class, 'show'])->name('admin.profile');
+        Route::patch('/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
         Route::get('/dashboard', [RoleHomeController::class, 'admin'])->name('admin.dashboard');
         Route::get('/requests', [AdminRequestController::class, 'index'])->name('admin.requests');
         Route::get('/requests/{requestModel}', [AdminRequestController::class, 'show'])->name('admin.requests.show');
@@ -50,19 +56,25 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
     });
 
     Route::prefix('hr')->middleware(['role:hr', 'employee.checked.in'])->group(function (): void {
-        Route::get('/', [RoleHomeController::class, 'hr'])->name('hr.home');
-        Route::view('/dashboard', 'ui.module', ['role' => 'HR', 'title' => 'Dashboard HR', 'description' => 'Tổng quan nhân sự và hoạt động trong ngày.', 'sectionTitle' => 'Tổng quan HR'])->name('hr.dashboard');
-        Route::view('/employees', 'ui.module', ['role' => 'HR', 'title' => 'Quản lý nhân viên', 'description' => 'Danh sách và hồ sơ nhân viên theo thiết kế HUIT HRMs.', 'sectionTitle' => 'Danh sách nhân viên'])->name('hr.employees');
-        Route::view('/departments', 'ui.module', ['role' => 'HR', 'title' => 'Quản lý phòng ban', 'description' => 'Cơ cấu tổ chức các đơn vị trực thuộc.', 'sectionTitle' => 'Danh sách phòng ban'])->name('hr.departments');
-        Route::view('/positions', 'ui.module', ['role' => 'HR', 'title' => 'Quản lý chức vụ', 'description' => 'Danh mục chức vụ trong hệ thống.', 'sectionTitle' => 'Danh sách chức vụ'])->name('hr.positions');
+        Route::get('/', [HrManagementController::class, 'dashboard'])->name('hr.home');
+        Route::get('/dashboard', [HrManagementController::class, 'dashboard'])->name('hr.dashboard');
+        Route::get('/employees', [HrManagementController::class, 'employees'])->name('hr.employees');
+        Route::get('/departments', [HrManagementController::class, 'departments'])->name('hr.departments');
+        Route::get('/positions', [HrManagementController::class, 'positions'])->name('hr.positions');
         Route::get('/attendance', [AttendanceManagementController::class, 'index'])->name('hr.attendance.index');
         Route::get('/attendance/{attendance}', [AttendanceManagementController::class, 'show'])->name('hr.attendances.show');
         Route::match(['put', 'patch'], '/attendance/{attendance}', [AttendanceManagementController::class, 'update'])->name('hr.attendances.update');
-        Route::view('/tasks', 'ui.module', ['role' => 'HR', 'title' => 'Danh sách công việc', 'description' => 'Theo dõi công việc trong không gian HR.', 'sectionTitle' => 'Công việc'])->name('hr.tasks');
-        Route::view('/requests', 'ui.module', ['role' => 'HR', 'title' => 'Phiếu yêu cầu', 'description' => 'Theo dõi phiếu yêu cầu của nhân sự.', 'sectionTitle' => 'Danh sách PYC'])->name('hr.requests');
-        Route::view('/recruitment', 'ui.module', ['role' => 'HR', 'title' => 'Tuyển dụng', 'description' => 'Giao diện quy trình tuyển dụng theo Stitch.', 'sectionTitle' => 'Tuyển dụng'])->name('hr.recruitment');
-        Route::view('/termination', 'ui.module', ['role' => 'HR', 'title' => 'Thôi việc', 'description' => 'Giao diện quy trình thôi việc theo Stitch.', 'sectionTitle' => 'Thôi việc'])->name('hr.termination');
-        Route::view('/profile', 'ui.module', ['role' => 'HR', 'title' => 'Hồ sơ cá nhân', 'description' => 'Thông tin hồ sơ của tài khoản HR.', 'sectionTitle' => 'Hồ sơ HR'])->name('hr.profile');
+        // Compatibility names used by legacy HR attendance views and tests.
+        // The optional segment keeps the generated URL identical while avoiding
+        // duplicate route names for the same URI in Laravel's route collection.
+        Route::get('/attendance/{_compat?}', [AttendanceManagementController::class, 'index'])->name('hr.attendances.index');
+        Route::get('/attendance/{attendance}/{_compat?}', [AttendanceManagementController::class, 'show'])->name('hr.attendance.show');
+        Route::match(['put', 'patch'], '/attendance/{attendance}/{_compat?}', [AttendanceManagementController::class, 'update'])->name('hr.attendance.update');
+        Route::get('/tasks', [HrManagementController::class, 'tasks'])->name('hr.tasks');
+        Route::get('/requests', [HrManagementController::class, 'requests'])->name('hr.requests');
+        Route::get('/recruitment', [HrManagementController::class, 'recruitment'])->name('hr.recruitment');
+        Route::get('/termination', [HrManagementController::class, 'termination'])->name('hr.termination');
+        Route::get('/profile', [HrManagementController::class, 'profile'])->name('hr.profile');
     });
 
     Route::prefix('employee')->middleware('role:employee')->group(function (): void {

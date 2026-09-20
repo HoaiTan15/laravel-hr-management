@@ -20,12 +20,17 @@ class RoleHomeController extends Controller
     {
         return view('admin.dashboard', [
             'role' => 'Admin',
+            'title' => 'Dashboard Admin',
+            'topTitle' => 'Cổng quản trị',
+            'topSub' => 'Tổng quan hệ thống HRMS',
             'stats' => [
                 ['label' => 'Tổng tài khoản', 'value' => User::count()],
                 ['label' => 'Tài khoản đang hoạt động', 'value' => User::where('is_active', true)->count()],
                 ['label' => 'PYC chờ xử lý', 'value' => PersonnelRequest::where('status', RequestStatus::PENDING)->count()],
                 ['label' => 'PYC đã xử lý', 'value' => PersonnelRequest::whereIn('status', [RequestStatus::REJECTED, RequestStatus::COMPLETED])->count()],
             ],
+            'latestRequests' => PersonnelRequest::with('creator')->latest()->limit(5)->get(),
+            'latestUsers' => User::latest()->limit(5)->get(),
         ]);
     }
 
@@ -62,6 +67,8 @@ class RoleHomeController extends Controller
             ->where('status', 'pending')
             ->count();
 
+        $attendanceModal = $request->session()->get('attendance_modal');
+
         return view('employee.dashboard', [
             'role' => 'employee',
             'active' => 'dashboard',
@@ -75,13 +82,10 @@ class RoleHomeController extends Controller
             'tasksDueToday' => $tasksDueToday,
             'requests' => $requests,
             'pendingRequestCount' => $pendingRequestCount,
-            'show' => $attendance
-                ? null
-                : 'checkin',
+            'show' => $attendanceModal ?? ($attendance ? null : 'checkin'),
             'weekdayLabels' => ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'],
             'requestTypeLabels' => ['hardware' => 'Phần cứng', 'software' => 'Phần mềm', 'account' => 'Account', 'other' => 'Khác', 'profile_change' => 'Thay đổi hồ sơ'],
             'pendingProfileChange' => null,
-            'show' => $attendance ? null : 'checkin',
         ]);
     }
 }

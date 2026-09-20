@@ -52,7 +52,7 @@ class EmployeeAttendanceTest extends TestCase
         $this->assertTrue($firstCheckout->equalTo(Attendance::firstOrFail()->check_out_at));
     }
 
-    public function test_logout_with_open_shift_shows_checkout_confirmation_without_logging_out(): void
+    public function test_logout_with_open_shift_redirects_to_dashboard_checkout_modal(): void
     {
         $employee = $this->createEmployee();
         Attendance::create([
@@ -63,8 +63,8 @@ class EmployeeAttendanceTest extends TestCase
 
         $this->actingAs($employee->user)
             ->post(route('logout'))
-            ->assertOk()
-            ->assertSee('Xác nhận Check-out');
+            ->assertRedirect(route('employee.home'))
+            ->assertSessionHas('attendance_modal', 'checkout-confirmation');
 
         $this->assertAuthenticatedAs($employee->user);
     }
