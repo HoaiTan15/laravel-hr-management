@@ -59,15 +59,15 @@ class AttendanceTest extends TestCase
         $this->assertDatabaseMissing('attendances', ['employee_id' => $other->id]);
     }
 
-    public function test_check_out_succeeds_and_logs_user_out(): void
+    public function test_check_out_succeeds_without_logging_user_out(): void
     {
         $employee = $this->createEmployee();
         Attendance::create(['employee_id' => $employee->id, 'work_date' => today(), 'check_in_at' => now()->subHour()]);
 
         $this->actingAs($employee->user)->post(route('attendance.checkout'))
-            ->assertRedirect(route('login'));
+            ->assertRedirect(route('employee.home'));
 
-        $this->assertGuest();
+        $this->assertAuthenticatedAs($employee->user);
         $this->assertNotNull(Attendance::first()->fresh()->check_out_at);
     }
 

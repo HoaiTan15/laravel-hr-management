@@ -108,11 +108,31 @@ class AuthAndRoleTest extends TestCase
 
         $this->actingAs($employee->user)
             ->get(route('employee.home'))
-            ->assertRedirect(route('attendance.check-in'));
+            ->assertOk()
+            ->assertSee('Chấm công đầu ngày')
+            ->assertSee('Check-in ngay');
 
         $this->actingAs($employee->user)
             ->get(route('attendance.check-in'))
             ->assertOk();
+    }
+
+    public function test_authenticated_employee_entering_the_application_reaches_the_check_in_gate(): void
+    {
+        $employee = $this->createEmployee();
+
+        $this->actingAs($employee->user)
+            ->get(route('home'))
+            ->assertRedirect(route('employee.home'));
+
+        $this->actingAs($employee->user)
+            ->get(route('employee.home'))
+            ->assertOk()
+            ->assertSee('Chấm công đầu ngày');
+
+        $this->actingAs($employee->user)
+            ->get(route('employee.tasks.index'))
+            ->assertRedirect(route('employee.home'));
     }
 
     public function test_checked_in_employee_can_access_their_landing_area(): void
@@ -144,6 +164,14 @@ class AuthAndRoleTest extends TestCase
         $this->actingAs($hr->user)
             ->get(route('hr.home'))
             ->assertRedirect(route('attendance.check-in'));
+    }
+
+    public function test_admin_cannot_access_employee_hr_attendance_entry_routes(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::ADMIN]);
+
+        $this->actingAs($admin)->get(route('attendance.check-in'))->assertForbidden();
+        $this->actingAs($admin)->post(route('attendance.check-out'))->assertForbidden();
     }
 
     public function test_inactive_authenticated_user_is_logged_out(): void

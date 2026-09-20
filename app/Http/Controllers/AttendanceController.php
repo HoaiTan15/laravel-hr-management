@@ -32,23 +32,16 @@ class AttendanceController extends Controller
         $attendance = $this->attendanceService->todayAttendance($request->user());
 
         if (! $attendance || $attendance->check_out_at !== null) {
-            auth()->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-
             return redirect()->route('login');
         }
 
-        return view('attendance.check-out', compact('attendance'));
+        return view('attendance.check-out-confirmation', compact('attendance'));
     }
 
     public function checkout(CheckOutRequest $request): RedirectResponse
     {
         $this->attendanceService->checkOut($request->user());
-        auth()->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', 'Check-out thành công.');
+        return redirect()->route('employee.home')->with('checkout_success', true);
     }
 }

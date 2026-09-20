@@ -25,7 +25,7 @@ class EnsureEmployeeCheckedIn
             ->exists();
 
         if (! $hasCheckedIn) {
-            return redirect()->route('attendance.check-in');
+            return redirect()->route($user->role === UserRole::EMPLOYEE ? 'employee.home' : 'attendance.check-in');
         }
 
         return $next($request);

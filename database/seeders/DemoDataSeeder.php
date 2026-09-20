@@ -40,20 +40,24 @@ class DemoDataSeeder extends Seeder
         );
         Task::updateOrCreate(
             ['assigned_to' => $employeeTwo->id, 'title' => 'Prepare monthly report'],
-            ['created_by' => $hr->id, 'description' => 'Prepare a sample monthly operations report.', 'status' => TaskStatus::PENDING, 'due_at' => '2026-10-05 17:00:00'],
+            ['created_by' => $hr->id, 'description' => 'Prepare a sample monthly operations report.', 'status' => TaskStatus::IN_PROGRESS, 'due_at' => '2026-10-05 17:00:00'],
         );
 
         Request::updateOrCreate(
             ['created_by' => $employeeOne->user_id, 'type' => RequestType::PROFILE_CHANGE],
-            ['payload' => ['phone' => '0900000099'], 'status' => RequestStatus::PENDING],
+            ['payload' => ['changes' => ['cccd' => '001234567899'], 'reason' => 'Demo identity change.'], 'status' => RequestStatus::PENDING],
         );
         Request::updateOrCreate(
             ['created_by' => $employeeTwo->user_id, 'type' => RequestType::PROFILE_CHANGE],
-            ['payload' => ['address' => 'Fictional District'], 'status' => RequestStatus::APPROVED, 'processed_by' => $admin->id, 'processed_at' => '2026-09-10 10:00:00', 'processing_note' => 'Approved demo request.'],
+            ['payload' => ['changes' => ['gender' => 'female'], 'reason' => 'Demo gender change.'], 'status' => RequestStatus::COMPLETED, 'processed_by' => $admin->id, 'processed_at' => '2026-09-10 10:00:00', 'processing_note' => 'Completed demo request.'],
         );
         Request::updateOrCreate(
             ['created_by' => $employeeOne->user_id, 'type' => RequestType::PROFILE_CHANGE, 'status' => RequestStatus::REJECTED],
-            ['payload' => ['phone' => '0900000088'], 'processed_by' => $admin->id, 'processed_at' => '2026-09-11 10:00:00', 'processing_note' => 'Rejected demo request.'],
+            ['payload' => ['changes' => ['date_of_birth' => '1999-09-09'], 'reason' => 'Demo date change.'], 'processed_by' => $admin->id, 'processed_at' => '2026-09-11 10:00:00', 'processing_note' => 'Rejected demo request.'],
+        );
+        Request::updateOrCreate(
+            ['created_by' => $employeeOne->user_id, 'type' => RequestType::OTHER],
+            ['type' => RequestType::OTHER, 'payload' => ['title' => 'Demo support request', 'content' => 'Demo support content.'], 'status' => RequestStatus::PENDING],
         );
 
         PersonnelProcess::updateOrCreate(

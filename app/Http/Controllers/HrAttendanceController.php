@@ -29,14 +29,14 @@ class HrAttendanceController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('hr.attendances.index', compact('attendances'));
+        return view('hr.attendance.index', compact('attendances'));
     }
 
     public function show(Attendance $attendance): View
     {
         $attendance->load(['employee.department', 'employee.position', 'adjustedBy']);
 
-        return view('hr.attendances.show', [
+        return view('hr.attendance.show', [
             'attendance' => $attendance,
             'status' => $this->attendanceService->status($attendance),
         ]);

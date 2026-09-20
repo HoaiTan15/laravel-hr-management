@@ -15,7 +15,7 @@
             <h2 style="margin:0 0 8px; font-size:18px;">Bạn muốn check-out hôm nay?</h2>
             <p style="margin:0 0 20px; color:#64748b; font-size:14px;">Check-in: {{ $attendance->check_in_at->format('d/m/Y H:i') }}</p>
             <div style="display:flex; gap:12px;">
-                <form method="POST" action="{{ route('attendance.checkout') }}">
+                <form method="POST" action="{{ route('attendance.check-out') }}">
                     @csrf
                     <button class="button button-primary" type="submit">Xác nhận check-out</button>
                 </form>
