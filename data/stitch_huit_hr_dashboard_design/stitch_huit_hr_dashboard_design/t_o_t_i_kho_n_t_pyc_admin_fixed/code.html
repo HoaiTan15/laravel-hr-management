@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="vi" style="width: 1280px; height: 1075px; overflow: hidden; position: relative;"><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Tạo tài khoản từ PYC - Admin - Fixed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            huit: {
+              primary: '#004385',
+              primaryHover: '#003366',
+              secondary: '#F37021',
+              surface: '#F8F9FC',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+      }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="bg-[#F8F9FC] text-slate-800 antialiased min-h-screen" style="cursor: grabbing; user-select: none;">
+  <div class="flex min-h-screen">
+    <!-- 1. SIDEBAR ADMIN (Đồng bộ 100% Dashboard Admin & Quản lý tài khoản) -->
+    <aside class="w-64 fixed left-0 top-0 bottom-0 bg-white border-r border-slate-200 z-50 flex flex-col justify-between">
+      <div class="flex flex-col">
+        <!-- Brand Logo HUIT HRMS -->
+        <div class="h-20 px-6 flex items-center gap-3 border-b border-slate-100">
+          <div class="w-10 h-10 rounded-xl bg-[#004385] text-white flex items-center justify-center font-bold text-xl shadow-sm">
+            H
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-[#004385] text-base leading-tight tracking-tight">HUIT HRMS</span>
+            <span class="text-[11px] font-semibold text-[#F37021] uppercase tracking-wider">ĐH CÔNG THƯƠNG</span>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div class="px-4 py-6">
+          <span class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400">HỆ THỐNG QUẢN TRỊ</span>
+          <nav class="mt-3 flex flex-col gap-1.5">
+            <!-- Dashboard Admin -->
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-[14px]">
+              <span class="material-symbols-outlined text-[20px]">dashboard</span>
+              <span>Dashboard Admin</span>
+            </a>
+            <!-- Danh sách PYC -->
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-[14px]">
+              <span class="material-symbols-outlined text-[20px]">checklist</span>
+              <span>Danh sách PYC</span>
+            </a>
+            <!-- Quản lý tài khoản (ACTIVE) -->
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg bg-[#004385] text-white font-semibold text-[14px] shadow-sm">
+              <span class="material-symbols-outlined text-[20px]">manage_accounts</span>
+              <span>Quản lý tài khoản</span>
+            </a>
+            <!-- Hồ sơ cá nhân -->
+            <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all font-medium text-[14px]">
+              <span class="material-symbols-outlined text-[20px]">account_circle</span>
+              <span>Hồ sơ cá nhân</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Đăng xuất -->
+      <div class="p-4 border-t border-slate-100">
+        <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors font-medium text-[14px]">
+          <span class="material-symbols-outlined text-[20px]">logout</span>
+          <span>Đăng xuất</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- 2. MAIN CONTENT AREA (Chiều rộng bằng phần còn lại sau sidebar) -->
+    <div class="pl-64 flex flex-col flex-1 min-h-screen">
+      <!-- TOPBAR ADMIN -->
+      <header class="h-20 bg-white border-b border-slate-200 sticky top-0 z-40 px-8 flex items-center justify-between">
+        <div class="flex items-center gap-2 text-[14px] text-slate-500">
+          <span class="text-[#004385] font-bold">HUIT HRM Portal</span>
+          <span class="material-symbols-outlined text-[16px] text-slate-400">chevron_right</span>
+          <span>Khu vực Quản trị</span>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <!-- Chuông thông báo có chấm cam -->
+          <button type="button" class="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-full transition-colors">
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
+            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-[#F37021] rounded-full ring-2 ring-white"></span>
+          </button>
+
+          <div class="h-8 w-px bg-slate-200"></div>
+
+          <!-- Profile Quản trị viên -->
+          <div class="flex items-center gap-3">
+            <div class="flex flex-col text-right">
+              <span class="text-[14px] font-semibold text-slate-800 leading-tight">Nguyễn Văn Admin</span>
+              <span class="text-[11px] font-bold text-[#F37021] uppercase tracking-wider">ADMIN</span>
+            </div>
+            <div class="w-9 h-9 rounded-full bg-[#004385] text-white flex items-center justify-center font-bold text-sm shadow-sm">
+              <span class="material-symbols-outlined text-[20px]">person</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE BODY (Padding 24px) -->
+      <main class="p-6 flex-1 flex flex-col max-w-5xl w-full mx-auto">
+        <!-- 1. HEADER TRANG -->
+        <div class="flex items-center justify-between gap-4 mb-5">
+          <div class="flex flex-col">
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-1 text-[13px] text-slate-500 mb-1">
+              <span>Hệ thống quản trị</span>
+              <span class="material-symbols-outlined text-[14px] text-slate-400">chevron_right</span>
+              <span>Quản lý tài khoản</span>
+              <span class="material-symbols-outlined text-[14px] text-slate-400">chevron_right</span>
+              <span class="text-[#004385] font-semibold">Tạo tài khoản</span>
+            </nav>
+            <!-- Title 22px -->
+            <h1 class="text-[22px] font-bold text-slate-900 leading-tight">
+              Tạo và kích hoạt tài khoản
+            </h1>
+            <p class="text-[14px] text-slate-500 mt-0.5">
+              Tạo tài khoản từ phiếu yêu cầu <span class="font-semibold text-[#004385]">PYC-2026-088</span>
+            </p>
+          </div>
+
+          <!-- Nút Quay lại -->
+          <button type="button" class="h-10 px-4 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm flex items-center gap-2 text-[14px] font-medium transition-all">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            <span>Quay lại</span>
+          </button>
+        </div>
+
+        <!-- 2. THANH THÔNG TIN PYC (Card ngang gọn gàng 80-100px) -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-[14px] flex-wrap gap-y-2">
+            <div class="flex items-center gap-2">
+              <span class="text-slate-500">Mã phiếu:</span>
+              <span class="font-bold text-[#004385] tracking-wide">PYC-2026-088</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-500">Loại:</span>
+              <span class="font-medium text-slate-800">Account</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-500">Người gửi:</span>
+              <span class="font-medium text-slate-800">HR</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-slate-500">Ngày gửi:</span>
+              <span class="font-medium text-slate-800">15/09/2026</span>
+            </div>
+            <!-- Badge Đang xử lý -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[12px] font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#F37021]"></span>
+              <span>Đang xử lý</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 pt-2.5 mt-2.5 border-t border-slate-100 text-[14px] text-slate-600">
+            <span class="material-symbols-outlined text-[17px] text-[#004385]">info</span>
+            <span>Yêu cầu tạo tài khoản cho nhân viên mới</span>
+          </div>
+        </div>
+
+        <!-- 3. CARD NHÂN VIÊN ĐƯỢC LIÊN KẾT (Bố cục 2 cột, không dài dòng) -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-5">
+          <h2 class="text-[16px] font-bold text-slate-900 mb-3.5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#004385] text-[20px]">badge</span>
+            <span>Nhân viên được liên kết</span>
+          </h2>
+
+          <div class="grid grid-cols-2 gap-6 bg-slate-50/70 p-4 rounded-lg border border-slate-100">
+            <!-- Cột trái -->
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-blue-100 text-[#004385] flex items-center justify-center font-bold text-base shadow-sm shrink-0">
+                LL
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[15px] font-bold text-slate-900">ThS. Lê Hoàng Long</span>
+                <span class="text-[14px] text-slate-600 mt-0.5">Mã NV: <strong class="font-semibold text-slate-800">NV-HUIT-2026-135</strong></span>
+                <span class="text-[14px] text-slate-600 truncate">Email: longlh@candidate.vn</span>
+              </div>
+            </div>
+
+            <!-- Cột phải -->
+            <div class="grid grid-cols-2 gap-y-2 gap-x-4 text-[14px] border-l border-slate-200 pl-6">
+              <div class="flex flex-col">
+                <span class="text-slate-500 text-[13px]">Phòng ban</span>
+                <span class="font-semibold text-slate-800">Khoa Công nghệ Thông tin</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-slate-500 text-[13px]">Chức vụ</span>
+                <span class="font-semibold text-slate-800">Giảng viên</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-slate-500 text-[13px]">Ngày vào làm</span>
+                <span class="font-medium text-slate-800">01/10/2026</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-slate-500 text-[13px]">Trạng thái</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[12px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 w-fit">
+                  Đã tiếp nhận
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. CARD THÔNG TIN TÀI KHOẢN (Form 2 cột gọn gàng, input đồng đều, font >= 14px) -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 mb-5">
+          <h2 class="text-[16px] font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#004385] text-[20px]">manage_accounts</span>
+            <span>Thông tin tài khoản</span>
+          </h2>
+
+          <form id="createAccountForm" class="flex flex-col gap-4">
+            <!-- Hàng 1: Username & Email -->
+            <div class="grid grid-cols-2 gap-6">
+              <div class="flex flex-col">
+                <label for="usernameInput" class="text-[14px] font-semibold text-slate-800 mb-1.5">
+                  Tên đăng nhập (Username) <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  <input type="text" id="usernameInput" value="longlh" class="w-full h-10 px-3.5 rounded-lg border border-slate-300 text-slate-800 text-[14px] focus:border-[#004385] focus:ring-1 focus:ring-[#004385] focus:outline-none transition-all" required="">
+                </div>
+                <!-- Helper text ngắn gọn -->
+                <span class="text-[13px] text-slate-500 mt-1.5 flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[15px] text-slate-400">info</span>
+                  Tên đăng nhập phải là duy nhất
+                </span>
+              </div>
+
+              <div class="flex flex-col">
+                <label for="emailInput" class="text-[14px] font-semibold text-slate-800 mb-1.5">
+                  Email đăng nhập <span class="text-red-500">*</span>
+                </label>
+                <input type="email" id="emailInput" value="longlh@huit.edu.vn" class="w-full h-10 px-3.5 rounded-lg border border-slate-300 text-slate-800 text-[14px] focus:border-[#004385] focus:ring-1 focus:ring-[#004385] focus:outline-none transition-all" required="">
+              </div>
+            </div>
+
+            <!-- Hàng 2: Role & Trạng thái (Dạng dropdown tiêu chuẩn) -->
+            <div class="grid grid-cols-2 gap-6">
+              <div class="flex flex-col">
+                <label for="roleDropdown" class="text-[14px] font-semibold text-slate-800 mb-1.5">
+                  Vai trò (Role) <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  <select id="roleDropdown" class="w-full h-10 px-3.5 pr-9 rounded-lg border border-slate-300 bg-white text-slate-800 text-[14px] focus:border-[#004385] focus:ring-1 focus:ring-[#004385] focus:outline-none appearance-none cursor-pointer">
+                    <option value="Employee" selected="">Employee</option>
+                    <option value="HR">HR</option>
+                    <option value="Admin">Admin</option>
+                  </select>
+                  <span class="material-symbols-outlined text-[20px] text-slate-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">expand_more</span>
+                </div>
+              </div>
+
+              <div class="flex flex-col">
+                <label for="statusDropdown" class="text-[14px] font-semibold text-slate-800 mb-1.5">
+                  Trạng thái <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  <select id="statusDropdown" class="w-full h-10 px-3.5 pr-9 rounded-lg border border-slate-300 bg-white text-slate-800 text-[14px] focus:border-[#004385] focus:ring-1 focus:ring-[#004385] focus:outline-none appearance-none cursor-pointer">
+                    <option value="active" selected="">Đang hoạt động</option>
+                    <option value="inactive">Đã vô hiệu hóa</option>
+                  </select>
+                  <span class="material-symbols-outlined text-[20px] text-slate-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">expand_more</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hàng 3: Phương thức mật khẩu & Checkbox -->
+            <div class="grid grid-cols-2 gap-6 items-center">
+              <div class="flex flex-col">
+                <label for="pwdMethodDropdown" class="text-[14px] font-semibold text-slate-800 mb-1.5">
+                  Phương thức mật khẩu <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  <select id="pwdMethodDropdown" class="w-full h-10 px-3.5 pr-9 rounded-lg border border-slate-300 bg-white text-slate-800 text-[14px] focus:border-[#004385] focus:ring-1 focus:ring-[#004385] focus:outline-none appearance-none cursor-pointer">
+                    <option value="temp" selected="">Tạo mật khẩu tạm thời</option>
+                  </select>
+                  <span class="material-symbols-outlined text-[20px] text-slate-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">expand_more</span>
+                </div>
+              </div>
+
+              <!-- Checkbox đổi mật khẩu lần đầu -->
+              <div class="flex items-center pt-6">
+                <label class="inline-flex items-center gap-2.5 cursor-pointer select-none">
+                  <input type="checkbox" checked="" class="w-4 h-4 rounded text-[#004385] border-slate-300 focus:ring-[#004385] accent-[#004385] cursor-pointer">
+                  <span class="text-[14px] font-medium text-slate-800">
+                    Yêu cầu đổi mật khẩu trong lần đăng nhập đầu tiên
+                  </span>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- 5. GHI CHÚ HỆ THỐNG (Alert nhỏ màu xanh nhạt vừa vặn 1 dòng) -->
+        <div class="bg-blue-50/90 border border-blue-200 rounded-lg p-3 px-4 flex items-center gap-2.5 mb-5">
+          <span class="material-symbols-outlined text-[#004385] text-[20px] shrink-0">info</span>
+          <p class="text-[14px] text-blue-900 leading-snug">
+            Sau khi tài khoản được tạo thành công, PYC-2026-088 sẽ chuyển sang trạng thái <strong class="font-semibold text-[#004385]">Hoàn thành</strong>.
+          </p>
+        </div>
+
+        <!-- 6. THANH HÀNH ĐỘNG CUỐI FORM (Căn phải, nút đầy đủ, không bị cắt) -->
+        <div class="flex items-center justify-end gap-3 pb-8">
+          <button type="button" class="h-10 min-w-[100px] px-5 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 font-medium text-[14px] shadow-sm transition-all text-center">
+            Hủy
+          </button>
+          <button type="button" class="h-10 px-6 rounded-lg bg-[#004385] hover:bg-[#003366] text-white font-semibold text-[14px] shadow-sm flex items-center gap-2 transition-all">
+            <span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+            <span>Tạo và kích hoạt tài khoản</span>
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

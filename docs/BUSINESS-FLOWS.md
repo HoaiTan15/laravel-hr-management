@@ -25,6 +25,8 @@ These flows describe expected behavior only. They are not implementation code. E
 3. Without a check-in, the user is redirected to the check-in screen.
 4. The check-in screen and logout remain accessible.
 5. Admin is exempt from this check.
+6. The workday starts at 08:00; check-in after 08:30 is classified as late.
+7. When an HR/Employee user logs out with an open attendance, the system requires checkout confirmation before ending the session.
 
 ## 4. First check-in
 

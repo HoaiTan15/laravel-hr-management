@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"tertiary-fixed-dim":"#93ccff","outline":"#737782","on-primary-fixed-variant":"#074688","error-container":"#ffdad6","primary-fixed":"#d6e3ff","background":"#f8f9ff","on-background":"#0b1c30","on-secondary-fixed":"#341000","surface-dim":"#cbdbf5","on-tertiary-fixed":"#001d31","surface-bright":"#f8f9ff","surface-container-lowest":"#ffffff","tertiary-container":"#00476e","on-error-container":"#93000a","error":"#ba1a1a","outline-variant":"#c3c6d2","surface-tint":"#2d5ea2","primary":"#002d5d","on-tertiary":"#ffffff","surface-container-low":"#eff4ff","on-tertiary-container":"#5bb8fe","surface-variant":"#d3e4fe","surface-container-high":"#dce9ff","tertiary":"#00304c","primary-container":"#004385","on-surface-variant":"#424750","secondary":"#a04100","on-secondary-fixed-variant":"#7a3000","primary-fixed-dim":"#a8c8ff","inverse-primary":"#a8c8ff","on-secondary":"#ffffff","surface":"#f8f9ff","on-primary-fixed":"#001b3d","on-primary-container":"#85b2fb","secondary-fixed-dim":"#ffb693","surface-container":"#e5eeff","on-tertiary-fixed-variant":"#004b73","on-error":"#ffffff","on-primary":"#ffffff","inverse-surface":"#213145","secondary-container":"#fc7728","on-secondary-container":"#5d2300","secondary-fixed":"#ffdbcb","on-surface":"#0b1c30","tertiary-fixed":"#cce5ff","inverse-on-surface":"#eaf1ff","surface-container-highest":"#d3e4fe"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xs":"0.25rem","gutter":"1rem","space-sm":"0.5rem","space-xl":"2rem","space-md":"0.75rem","margin-desktop":"2rem","margin":"1rem","space-lg":"1.25rem","gutter-desktop":"1.5rem"},"fontFamily":{"headline-xl":["Inter"],"caption":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"title-sm":["Inter"],"headline-lg":["Inter"],"headline-sm":["Inter"],"title-md":["Inter"],"label-md":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"],"headline-xl-mobile":["Inter"],"body-md":["Inter"],"headline-lg-mobile":["Inter"]},"fontSize":{"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"caption":["11px",{"lineHeight":"14px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"title-sm":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg-mobile":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}]}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-primary text-on-primary z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.08)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-md bg-tertiary"><div class="w-9 h-9 rounded-lg bg-tertiary-container flex items-center justify-center font-headline-sm text-on-tertiary-container font-bold">H</div><div class="flex flex-col"><span class="font-title-sm text-on-primary tracking-tight leading-none uppercase">HUIT HRMS</span><span class="font-caption text-primary-fixed-dim tracking-wider uppercase mt-1">ĐH Công Thương</span></div></div><div class="px-space-md pt-space-lg"><span class="px-space-md font-label-sm uppercase tracking-wider text-primary-fixed-dim/70">Hệ thống quản trị</span><nav class="mt-space-sm flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-bold shadow-[0_1px_3px_0_rgba(15,23,42,0.04)]"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-low hover:bg-tertiary-container hover:text-on-primary transition-all" data-path="dashboard-admin" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-title-sm">Dashboard Admin</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-low hover:bg-tertiary-container hover:text-on-primary transition-all" data-path="danh-sach-pyc" href="#"><span class="material-symbols-outlined text-[20px]">checklist</span><span class="font-title-sm">Danh sách PYC</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-low hover:bg-tertiary-container hover:text-on-primary transition-all" data-path="quan-ly-tai-khoan" href="#"><span class="material-symbols-outlined text-[20px]">admin_panel_settings</span><span class="font-title-sm">Quản lý tài khoản</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-surface-container-low hover:bg-tertiary-container hover:text-on-primary transition-all" data-path="ho-so-ca-nhan" href="#"><span class="material-symbols-outlined text-[20px]">account_circle</span><span class="font-title-sm">Hồ sơ cá nhân</span></a></nav></div></div><div class="p-space-md bg-tertiary/40"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-error hover:bg-error-container hover:text-on-error-container transition-colors" data-path="dang-xuat" href="#"><span class="material-symbols-outlined text-[20px]">logout</span><span class="font-title-sm font-semibold">Đăng xuất</span></a></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-margin-desktop"><div class="flex items-center gap-space-sm font-body-sm text-on-surface-variant"><span class="font-title-sm text-primary font-bold">HUIT HRM Portal</span><span class="material-symbols-outlined text-[16px] text-outline-variant">chevron_right</span><span class="font-body-sm text-on-surface">Khu vực Quản trị</span></div><div class="flex items-center gap-space-lg"><button class="relative p-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-full transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-2.5 h-2.5 bg-secondary-container rounded-full ring-2 ring-surface-container-lowest"></span></button><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-md"><div class="flex flex-col text-right"><span class="font-title-sm text-on-surface leading-tight font-semibold">Nguyễn Văn Admin</span><span class="font-caption text-secondary font-semibold uppercase">ADMIN</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 px-margin-desktop py-space-xl bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Breadcrumb & Top Bar Navigation Info -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm font-label-md text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Hệ thống quản trị</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Quản lý tài khoản</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="text-primary font-semibold">Tạo tài khoản</span>
+</div>
+<h1 class="font-headline-md text-on-surface font-bold tracking-tight">Tạo và kích hoạt tài khoản</h1>
+<p class="font-body-md text-on-surface-variant">Tạo tài khoản người dùng từ phiếu yêu cầu đã được tiếp nhận và thẩm định</p>
+</div>
+<div class="flex items-center gap-space-md">
+<a class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-lg bg-surface-container-lowest text-on-surface-variant shadow-sm hover:bg-surface-container hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="font-title-sm">Quay lại</span>
+</a>
+<div class="hidden lg:flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        HUIT Internal Portal
+      </div>
+</div>
+</div>
+<!-- Main Content 2-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-start">
+<!-- LEFT COLUMN (~40% - 5 cols on lg) -->
+<div class="lg:col-span-5 flex flex-col gap-space-xl">
+<!-- Card 1: PYC Information -->
+<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between gap-space-sm pb-space-md border-b-0">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[22px]">description</span>
+<h2 class="font-title-md text-on-surface font-bold">Thông tin phiếu yêu cầu</h2>
+</div>
+<span class="inline-flex items-center gap-1.5 px-space-md py-0.5 rounded-full bg-secondary-fixed text-on-secondary-container font-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+            Đang xử lý
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-md bg-surface-container-low p-space-md rounded-lg">
+<div class="flex flex-col">
+<span class="font-caption text-on-surface-variant uppercase tracking-wider">Mã phiếu PYC</span>
+<div class="mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-title-sm font-bold w-fit">
+              PYC-2026-088
+            </div>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-on-surface-variant uppercase tracking-wider">Loại yêu cầu</span>
+<span class="mt-1 inline-flex items-center px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-md font-semibold w-fit">
+              Cấp mới Account
+            </span>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm text-body-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface-variant">Người gửi yêu cầu:</span>
+<div class="flex items-start gap-space-sm mt-0.5">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm font-bold mt-0.5">
+                TN
+              </div>
+<div class="flex flex-col">
+<span class="font-title-sm text-on-surface font-semibold">ThS. Trần Hoàng Nam</span>
+<span class="font-body-sm text-on-surface-variant">Trưởng bộ môn Mạng &amp; Truyền thông - Khoa CNTT</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs text-on-surface-variant">
+<span class="font-label-md">Thời gian gửi:</span>
+<span class="font-body-sm font-medium text-on-surface">15/09/2026 - 08:30</span>
+</div>
+<div class="flex flex-col gap-1 pt-space-xs">
+<span class="font-label-md text-on-surface-variant">Nội dung đề xuất:</span>
+<p class="p-space-md rounded-lg bg-surface text-on-surface font-body-sm leading-relaxed italic">
+              "Đề xuất cấp tài khoản hệ thống định danh (Google Workspace &amp; HUIT HRMs) cho giảng viên cơ hữu mới trúng tuyển đợt 2/2026 để kịp chuẩn bị bài giảng học kỳ I."
+            </p>
+</div>
+<div class="flex flex-col gap-1.5 pt-space-xs">
+<span class="font-label-md text-on-surface-variant">Tệp tài liệu đính kèm:</span>
+<div class="flex items-center justify-between p-space-sm px-space-md rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-error text-[24px]">picture_as_pdf</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-primary truncate font-semibold">Quyết định trúng tuyển #412/QĐ-ĐHCT.pdf</span>
+<span class="font-caption text-outline">Dung lượng: 1.8 MB • Đã kiểm duyệt số</span>
+</div>
+</div>
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Tải xuống tệp" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Card 2: Linked Employee Dossier -->
+<section class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between gap-space-sm pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[22px]">badge</span>
+<h2 class="font-title-md text-on-surface font-bold">Nhân viên được liên kết</h2>
+</div>
+<span class="inline-flex items-center gap-1.5 px-space-md py-0.5 rounded-full bg-surface-container-high text-primary font-label-md font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+            Đã xác thực tuyển dụng
+          </span>
+</div>
+<div class="flex items-center gap-space-md p-space-md rounded-xl bg-surface-container-low">
+<div class="relative w-14 h-14 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container font-headline-sm font-bold shadow-inner">
+<span>LL</span>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary-container ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-title-md text-on-surface font-bold">ThS. Lê Hoàng Long</span>
+<span class="font-label-sm font-mono px-2 py-0.5 rounded bg-surface-container-highest text-primary font-semibold">NV-HUIT-2026-135</span>
+</div>
+<span class="font-body-sm text-on-surface-variant mt-0.5">Giảng viên cơ hữu • Bộ môn Khoa học Dữ liệu</span>
+<span class="font-caption text-outline-variant font-mono">longlh@candidate.vn</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm text-body-sm">
+<div class="flex justify-between py-1.5 px-space-sm rounded bg-surface">
+<span class="font-label-md text-on-surface-variant">Phòng ban/Khoa:</span>
+<span class="font-body-sm font-semibold text-on-surface text-right">Khoa Công nghệ thông tin (FIT)</span>
+</div>
+<div class="flex justify-between py-1.5 px-space-sm rounded bg-surface">
+<span class="font-label-md text-on-surface-variant">Trạng thái nhân sự:</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm font-semibold">
+              Mới tiếp nhận / Chuẩn bị nhận việc
+            </span>
+</div>
+<div class="flex justify-between py-1.5 px-space-sm rounded bg-surface">
+<span class="font-label-md text-on-surface-variant">Hình thức tuyển dụng:</span>
+<span class="font-body-sm font-medium text-on-surface">Cơ hữu - Hợp đồng nghiên cứu &amp; giảng dạy</span>
+</div>
+</div>
+<!-- Sync notice banner -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-surface-container text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">sync_alt</span>
+<div class="flex flex-col text-body-sm">
+<span class="font-title-sm text-primary font-semibold">Đồng bộ tự động</span>
+<span class="text-on-surface-variant">Dữ liệu nhân sự được đồng bộ tự động từ cổng tuyển dụng viên chức HUIT 2026. Các trường thông tin cơ bản không thể chỉnh sửa thủ công tại bước này.</span>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN (~60% - 7 cols on lg) -->
+<div class="lg:col-span-7 flex flex-col gap-space-xl">
+<!-- Account Provisioning Form Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm flex flex-col gap-space-xl">
+<div class="flex flex-col gap-1 pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">manage_accounts</span>
+</div>
+<h2 class="font-headline-sm text-on-surface font-bold">Cấu hình thông tin tài khoản</h2>
+</div>
+<p class="font-body-md text-on-surface-variant mt-1">
+            Thiết lập tên định danh người dùng, email tổ chức giáo dục (@huit.edu.vn) và phân quyền chức năng trong phân hệ HUIT HRMs.
+          </p>
+</div>
+<form class="flex flex-col gap-space-lg" id="createAccountForm" onsubmit="event.preventDefault();">
+<!-- Field: Username with Validation State -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-title-sm text-on-surface font-semibold flex items-center gap-1" for="usernameInput">
+                Username <span class="text-error font-bold">*</span>
+</label>
+<span class="font-caption text-outline">Quy ước: tên + chữ cái đầu họ đệm</span>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[18px]">alternate_email</span>
+</div>
+<input class="w-full h-10 pl-10 pr-10 rounded-lg bg-surface text-on-surface font-body-md shadow-sm outline-none transition-all ring-2 ring-error" id="usernameInput" placeholder="Nhập username định danh..." type="text" value="longlh"/>
+<div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-error">
+<span class="material-symbols-outlined text-[20px]">error</span>
+</div>
+</div>
+<!-- Validation Error Alert Message -->
+<div class="flex items-center gap-1.5 mt-0.5 text-error">
+<span class="material-symbols-outlined text-[16px] shrink-0">warning</span>
+<span class="font-body-sm font-semibold">Username đã tồn tại trên hệ thống, vui lòng chọn username khác.</span>
+</div>
+<!-- Suggestions -->
+<div class="flex items-center gap-2 mt-1 flex-wrap">
+<span class="font-caption text-on-surface-variant font-medium">Gợi ý khả dụng:</span>
+<button class="px-2 py-0.5 rounded bg-surface-container font-mono font-caption text-primary hover:bg-surface-container-high transition-colors font-semibold" onclick="document.getElementById('usernameInput').value='longlh2'; document.getElementById('emailInput').value='longlh2@huit.edu.vn';" type="button">
+                longlh2
+              </button>
+<button class="px-2 py-0.5 rounded bg-surface-container font-mono font-caption text-primary hover:bg-surface-container-high transition-colors font-semibold" onclick="document.getElementById('usernameInput').value='long.lehoang'; document.getElementById('emailInput').value='long.lehoang@huit.edu.vn';" type="button">
+                long.lehoang
+              </button>
+<button class="px-2 py-0.5 rounded bg-surface-container font-mono font-caption text-primary hover:bg-surface-container-high transition-colors font-semibold" onclick="document.getElementById('usernameInput').value='longlh.fit'; document.getElementById('emailInput').value='longlh.fit@huit.edu.vn';" type="button">
+                longlh.fit
+              </button>
+</div>
+</div>
+<!-- Field: Institutional Login Email -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-title-sm text-on-surface font-semibold flex items-center gap-1" for="emailInput">
+                Email đăng nhập cơ quan <span class="text-error font-bold">*</span>
+</label>
+<span class="font-caption text-secondary font-semibold">Cấp hộp thư Google Workspace</span>
+</div>
+<div class="flex rounded-lg shadow-sm bg-surface overflow-hidden">
+<div class="flex items-center pl-3.5 text-outline">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</div>
+<input class="flex-1 h-10 px-3 bg-transparent text-on-surface font-body-md outline-none" id="emailInput" placeholder="email-can-bo@huit.edu.vn" type="text" value="longlh.fit@huit.edu.vn"/>
+<span class="px-3.5 h-10 flex items-center bg-surface-container text-on-surface-variant font-label-md font-mono select-none">
+                @huit.edu.vn
+              </span>
+</div>
+<p class="font-caption text-on-surface-variant">Hộp thư sẽ tự động được gán vào nhóm Google Group: <span class="font-mono text-primary font-semibold">giangvien-fit@huit.edu.vn</span></p>
+</div>
+<!-- Field: Role Assignment Selector -->
+<div class="flex flex-col gap-2 pt-space-xs">
+<label class="font-title-sm text-on-surface font-semibold flex items-center gap-1">
+              Vai trò phân quyền (Role) <span class="text-error font-bold">*</span>
+</label>
+<p class="font-caption text-on-surface-variant -mt-1">Chọn cấp bậc quyền hạn phù hợp với ngạch công tác và phân nhiệm khoa học.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mt-1">
+<!-- Role Option: Admin -->
+<label class="relative flex flex-col p-space-md rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">admin_panel_settings</span>
+<span class="font-title-sm font-bold text-on-surface">Admin</span>
+</div>
+<input class="w-4 h-4 text-primary accent-primary" name="account_role" type="radio" value="admin"/>
+</div>
+<span class="font-caption text-on-surface-variant mt-2 leading-snug">Toàn quyền cấu hình, vận hành và quản trị nhân sự đại học.</span>
+</label>
+<!-- Role Option: HR Officer -->
+<label class="relative flex flex-col p-space-md rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">badge</span>
+<span class="font-title-sm font-bold text-on-surface">HR Officer</span>
+</div>
+<input class="w-4 h-4 text-primary accent-primary" name="account_role" type="radio" value="hr"/>
+</div>
+<span class="font-caption text-on-surface-variant mt-2 leading-snug">Quản lý hồ sơ nhân viên, hợp đồng, chấm công và duyệt PYC.</span>
+</label>
+<!-- Role Option: Employee (Selected Active) -->
+<label class="relative flex flex-col p-space-md rounded-xl bg-surface-container-lowest ring-2 ring-primary shadow-sm cursor-pointer transition-all">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">school</span>
+<span class="font-title-sm font-bold text-primary">Employee</span>
+</div>
+<input checked="" class="w-4 h-4 text-primary accent-primary" name="account_role" type="radio" value="employee"/>
+</div>
+<span class="font-caption text-on-surface mt-2 leading-snug font-medium">Giảng viên / Nhân viên cơ hữu.</span>
+<span class="mt-2 text-[11px] text-primary bg-primary-fixed/30 px-2 py-1 rounded leading-tight font-semibold">
+                  Mặc định: Cổng GV, lịch giảng, chấm công
+                </span>
+</label>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container text-body-sm text-on-surface flex items-start gap-space-sm mt-1">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">verified_user</span>
+<span><strong>Mô tả quyền hạn Employee:</strong> Giảng viên ThS. Lê Hoàng Long sẽ có quyền truy cập Cổng Giảng viên HUIT, tra cứu bảng lương/chấm công, theo dõi đề án môn học và nộp các phiếu yêu cầu cá nhân.</span>
+</div>
+</div>
+<!-- Field: Initial Account State -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg pt-space-xs">
+<div class="flex flex-col gap-1.5">
+<label class="font-title-sm text-on-surface font-semibold" for="accountStatusSelect">Trạng thái tài khoản ban đầu</label>
+<div class="relative">
+<select class="w-full h-10 px-3 pr-8 rounded-lg bg-surface text-on-surface font-title-sm font-medium outline-none shadow-sm appearance-none cursor-pointer" id="accountStatusSelect">
+<option selected="" value="active">Đang hoạt động (Kích hoạt ngay)</option>
+<option value="pending">Tạm hoãn kích hoạt</option>
+<option value="restricted">Hạn chế truy cập mạng nội bộ</option>
+</select>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-title-sm text-on-surface font-semibold">Nhóm tài khoản liên kết</label>
+<div class="h-10 px-3 rounded-lg bg-surface text-on-surface-variant font-body-sm flex items-center justify-between">
+<span>FIT - Khoa Công nghệ Thông tin</span>
+<span class="material-symbols-outlined text-outline text-[18px]">lock</span>
+</div>
+</div>
+</div>
+<!-- Password Initialization Security Box -->
+<div class="p-space-lg rounded-xl bg-surface-container-low text-on-surface flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm text-primary font-title-sm font-bold">
+<span class="material-symbols-outlined text-[20px]">enhanced_encryption</span>
+<span>Cơ chế mật khẩu khởi tạo an toàn (Security Policy)</span>
+</div>
+<p class="font-body-sm text-on-surface-variant leading-relaxed">
+              Mật khẩu tạm thời được hệ thống tạo tự động an toàn (12 ký tự ngẫu nhiên mã hóa SHA-256) và sẽ được gửi trực tiếp đến email cá nhân của nhân viên (<span class="font-mono font-semibold text-on-surface">longlh@candidate.vn</span>) sau khi kích hoạt thành công.
+            </p>
+<div class="flex items-center gap-2 mt-1 text-outline font-caption">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>Tuyệt đối không cấp phát hoặc hiển thị mật khẩu dưới dạng văn bản thô (Plain text).</span>
+</div>
+</div>
+<!-- Checkboxes Section -->
+<div class="flex flex-col gap-space-md pt-space-xs">
+<label class="flex items-start gap-space-sm cursor-pointer select-none">
+<input checked="" class="w-4 h-4 mt-0.5 rounded accent-primary text-primary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-on-surface font-semibold">Yêu cầu đổi mật khẩu trong lần đăng nhập đầu tiên</span>
+<span class="font-body-sm text-on-surface-variant">Buộc giảng viên thiết lập mật khẩu mới đạt chuẩn bảo mật NIST SP 800-63B.</span>
+</div>
+</label>
+<label class="flex items-start gap-space-sm cursor-pointer select-none">
+<input checked="" class="w-4 h-4 mt-0.5 rounded accent-primary text-primary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-on-surface font-semibold">Gửi email thông báo thông tin đăng nhập và hướng dẫn kích hoạt</span>
+<span class="font-body-sm text-on-surface-variant">Đính kèm tài liệu Hướng dẫn sử dụng Cổng giảng viên HUIT và các kênh hỗ trợ kỹ thuật Trung tâm CNTT.</span>
+</div>
+</label>
+<label class="flex items-start gap-space-sm cursor-pointer select-none">
+<input checked="" class="w-4 h-4 mt-0.5 rounded accent-primary text-primary" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-title-sm text-on-surface font-semibold">Tự động cập nhật và đóng phiếu yêu cầu PYC-2026-088</span>
+<span class="font-body-sm text-on-surface-variant">Chuyển trạng thái phiếu sang "Đã hoàn thành" và gửi phản hồi đến Trưởng bộ môn ThS. Trần Hoàng Nam.</span>
+</div>
+</label>
+</div>
+<!-- Form Footer / Action Buttons -->
+<div class="pt-space-xl flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-2 text-on-surface-variant font-caption order-2 sm:order-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+<span>Phiên làm việc quản trị: Admin ID 001 • IP 10.20.4.15</span>
+</div>
+<div class="flex items-center gap-space-md w-full sm:w-auto order-1 sm:order-2">
+<button class="flex-1 sm:flex-initial px-space-lg py-2.5 rounded-lg bg-surface hover:bg-surface-container text-on-surface-variant font-title-sm font-semibold transition-all shadow-sm" type="button">
+                Hủy
+              </button>
+<button class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-space-xl py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-title-sm font-bold shadow-md transition-all active:scale-[0.98]" id="btnSubmit" onclick="handleCreateAccount()" type="button">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+<span>Tạo và kích hoạt tài khoản</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+<!-- Quick Tips Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">contact_support</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm font-bold">Cần hỗ trợ phân quyền nâng cao?</span>
+<span class="font-body-sm text-on-surface-variant">Liên hệ Trung tâm Công nghệ Thông tin HUIT qua nhánh nội bộ #104 để cấp chứng chỉ PKI.</span>
+</div>
+</div>
+<a class="hidden sm:inline-flex items-center gap-1 font-title-sm text-primary font-semibold hover:underline" href="#">
+          Quy chế cấp tài khoản
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Notification Toast Simulation -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-md p-space-md px-space-lg rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl" id="toastAlert">
+<span class="material-symbols-outlined text-secondary-fixed text-[24px]">info</span>
+<div class="flex flex-col">
+<span class="font-title-sm font-bold" id="toastTitle">Thông báo hệ thống</span>
+<span class="font-body-sm text-surface-container-highest" id="toastMessage">Đang xử lý yêu cầu...</span>
+</div>
+</div>
+</div>
+<script>
+  function handleCreateAccount() {
+    var usernameVal = document.getElementById('usernameInput').value.trim();
+    var toast = document.getElementById('toastAlert');
+    var toastTitle = document.getElementById('toastTitle');
+    var toastMsg = document.getElementById('toastMessage');
+
+    if (usernameVal === 'longlh') {
+      toastTitle.innerText = 'Lỗi nhập liệu';
+      toastMsg.innerText = 'Username "longlh" đã tồn tại. Vui lòng chọn một trong các gợi ý khả dụng.';
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(function() {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 4000);
+      return;
+    }
+
+    toastTitle.innerText = 'Thành công';
+    toastMsg.innerText = 'Tài khoản "' + usernameVal + '" đã được tạo và email kích hoạt đã được gửi thành công!';
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    setTimeout(function() {
+      toast.classList.add('translate-y-20', 'opacity-0');
+    }, 4500);
+  }
+</script></main></div></body></html>

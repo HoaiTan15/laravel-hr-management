@@ -77,7 +77,7 @@ class AuthAndRoleTest extends TestCase
 
     public function test_logout_invalidates_the_session(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => UserRole::ADMIN]);
 
         $this->actingAs($user)->post(route('logout'))
             ->assertRedirect(route('login'));
@@ -94,12 +94,12 @@ class AuthAndRoleTest extends TestCase
     public function test_roles_can_access_only_their_landing_area(): void
     {
         $admin = User::factory()->create(['role' => UserRole::ADMIN]);
-        $hr = User::factory()->create(['role' => UserRole::HR]);
+        $hr = $this->createEmployee(UserRole::HR);
 
         $this->actingAs($admin)->get(route('admin.home'))->assertOk();
         $this->actingAs($admin)->get(route('hr.home'))->assertForbidden();
-        $this->actingAs($hr)->get(route('hr.home'))->assertOk();
-        $this->actingAs($hr)->get(route('admin.home'))->assertForbidden();
+        $this->actingAs($hr->user)->get(route('hr.home'))->assertRedirect(route('attendance.check-in'));
+        $this->actingAs($hr->user)->get(route('admin.home'))->assertForbidden();
     }
 
     public function test_employee_is_redirected_until_they_have_checked_in(): void
@@ -108,11 +108,31 @@ class AuthAndRoleTest extends TestCase
 
         $this->actingAs($employee->user)
             ->get(route('employee.home'))
-            ->assertRedirect(route('attendance.check-in'));
+            ->assertOk()
+            ->assertSee('Chấm công đầu ngày')
+            ->assertSee('Check-in ngay');
 
         $this->actingAs($employee->user)
             ->get(route('attendance.check-in'))
             ->assertOk();
+    }
+
+    public function test_authenticated_employee_entering_the_application_reaches_the_check_in_gate(): void
+    {
+        $employee = $this->createEmployee();
+
+        $this->actingAs($employee->user)
+            ->get(route('home'))
+            ->assertRedirect(route('employee.home'));
+
+        $this->actingAs($employee->user)
+            ->get(route('employee.home'))
+            ->assertOk()
+            ->assertSee('Chấm công đầu ngày');
+
+        $this->actingAs($employee->user)
+            ->get(route('employee.tasks.index'))
+            ->assertRedirect(route('employee.home'));
     }
 
     public function test_checked_in_employee_can_access_their_landing_area(): void
@@ -130,13 +150,28 @@ class AuthAndRoleTest extends TestCase
             ->assertOk();
     }
 
-    public function test_admin_and_hr_are_not_subject_to_employee_check_in_gate(): void
+    public function test_admin_is_not_subject_to_employee_check_in_gate(): void
     {
         $admin = User::factory()->create(['role' => UserRole::ADMIN]);
-        $hr = User::factory()->create(['role' => UserRole::HR]);
 
         $this->actingAs($admin)->get(route('admin.home'))->assertOk();
-        $this->actingAs($hr)->get(route('hr.home'))->assertOk();
+    }
+
+    public function test_hr_is_redirected_until_they_have_checked_in(): void
+    {
+        $hr = $this->createEmployee(UserRole::HR);
+
+        $this->actingAs($hr->user)
+            ->get(route('hr.home'))
+            ->assertRedirect(route('attendance.check-in'));
+    }
+
+    public function test_admin_cannot_access_employee_hr_attendance_entry_routes(): void
+    {
+        $admin = User::factory()->create(['role' => UserRole::ADMIN]);
+
+        $this->actingAs($admin)->get(route('attendance.check-in'))->assertForbidden();
+        $this->actingAs($admin)->post(route('attendance.check-out'))->assertForbidden();
     }
 
     public function test_inactive_authenticated_user_is_logged_out(): void
@@ -153,11 +188,11 @@ class AuthAndRoleTest extends TestCase
         $this->assertGuest();
     }
 
-    private function createEmployee(): Employee
+    private function createEmployee(UserRole $role = UserRole::EMPLOYEE): Employee
     {
         $department = Department::create(['name' => fake()->unique()->company]);
         $position = Position::create(['name' => fake()->unique()->jobTitle]);
-        $user = User::factory()->create(['role' => UserRole::EMPLOYEE]);
+        $user = User::factory()->create(['role' => $role]);
 
         return Employee::create([
             'user_id' => $user->id,
