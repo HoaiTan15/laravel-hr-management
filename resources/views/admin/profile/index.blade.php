@@ -1,0 +1,21 @@
+@extends('layouts.admin')
+
+@section('content')
+    @php($initials = collect(explode(' ', trim($user->name)))->filter()->map(fn ($part) => strtoupper(substr($part, 0, 1)))->take(2)->implode(''))
+    <div class="stitch-page admin-page">
+        <div class="stitch-context-row"><div class="stitch-context"><span class="stitch-kicker">Admin</span><span class="stitch-context-slash">/</span><span>Hồ sơ cá nhân</span></div><span class="stitch-date"><span></span> Tài khoản đang hoạt động</span></div>
+        <div class="hr-module-heading"><div><h1>Hồ sơ cá nhân</h1><p>Thông tin tài khoản quản trị và quyền truy cập hệ thống.</p></div><div class="stitch-summary-icon"><span class="material-symbols-outlined">account_circle</span></div></div>
+        <div class="stitch-content-grid hr-profile-grid">
+            <div class="stitch-panel">
+                <div class="stitch-panel-head"><div class="stitch-panel-title"><span class="stitch-panel-icon primary"><span class="material-symbols-outlined">badge</span></span><div><h2>Thông tin tài khoản</h2><p>Dữ liệu trực tiếp từ database</p></div></div><span class="stitch-status-pill {{ $user->is_active ? 'completed' : 'rejected' }}">{{ $user->is_active ? 'Đang hoạt động' : 'Đã khóa' }}</span></div>
+                <div class="stitch-profile-card admin-profile-large"><div class="stitch-profile-avatar">{{ $initials ?: 'A' }}</div><div><strong>{{ $user->name }}</strong><span>{{ strtoupper($user->role->value) }}</span><small>{{ $user->email }}</small></div></div>
+                <form method="POST" action="{{ route('admin.profile.update') }}" class="admin-profile-form">
+                    @csrf @method('PATCH')
+                    <div class="admin-profile-fields"><div><label for="profile-name">Họ và tên</label><input id="profile-name" class="input" name="name" value="{{ old('name', $user->name) }}" required></div><div><label for="profile-email">Email</label><input id="profile-email" class="input" name="email" type="email" value="{{ old('email', $user->email) }}" required></div><div><label for="profile-password">Mật khẩu mới</label><input id="profile-password" class="input" name="password" type="password" minlength="8" placeholder="Để trống nếu không đổi" autocomplete="new-password"></div><div><label for="profile-password-confirmation">Xác nhận mật khẩu</label><input id="profile-password-confirmation" class="input" name="password_confirmation" type="password" minlength="8" placeholder="Nhập lại mật khẩu mới" autocomplete="new-password"></div></div>
+                    <button class="button" type="submit"><span class="material-symbols-outlined">save</span>Lưu thay đổi</button>
+                </form>
+            </div>
+            <div class="stitch-side-column"><div class="stitch-panel"><div class="stitch-side-head"><span class="material-symbols-outlined">security</span><div><h3>Quyền truy cập</h3><span>Vai trò {{ strtoupper($user->role->value) }}</span></div></div><div class="stitch-key-list"><div><span><span class="material-symbols-outlined">dashboard</span>Dashboard</span><strong class="green-text">Toàn quyền</strong></div><div><span><span class="material-symbols-outlined">group</span>Tài khoản</span><strong class="green-text">Quản lý</strong></div><div><span><span class="material-symbols-outlined">assignment</span>Phiếu yêu cầu</span><strong class="green-text">Phê duyệt</strong></div><div><span><span class="material-symbols-outlined">settings</span>Cấu hình hệ thống</span><strong class="green-text">Toàn quyền</strong></div></div><div class="stitch-info-note"><span class="material-symbols-outlined">info</span><p>Quyền Admin được dùng để quản trị tài khoản và kiểm soát quy trình phê duyệt.</p></div></div><div class="stitch-panel"><div class="stitch-side-head"><span class="material-symbols-outlined">history</span><div><h3>Thông tin phiên</h3><span>Hoạt động gần đây</span></div></div><div class="admin-activity-list"><div><span class="material-symbols-outlined">login</span><div><strong>Tài khoản đang đăng nhập</strong><small>{{ $user->email }}</small></div></div><div><span class="material-symbols-outlined">calendar_month</span><div><strong>Ngày tạo tài khoản</strong><small>{{ $user->created_at?->format('d/m/Y H:i') }}</small></div></div></div></div></div>
+        </div>
+    </div>
+@endsection

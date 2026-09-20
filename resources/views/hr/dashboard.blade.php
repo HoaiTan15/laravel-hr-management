@@ -1,34 +1,21 @@
 @extends('layouts.hr')
 
 @section('content')
-<div class="page">
-    <div class="crumb"><strong>CỔNG NHÂN SỰ | ĐẠI HỌC CÔNG THƯƠNG TP.HCM</strong>　/　Dashboard</div>
-    <h1>Dashboard HR</h1>
-    <p class="subtitle">Tổng quan tình hình nhân sự và hoạt động hôm nay.</p>
-
-    <div class="grid grid-4">
-        <div class="card stat"><div class="stat-label">Tổng nhân viên</div><div class="stat-value">125 <small>/ 128 cán bộ</small></div><span class="badge green">97.6%</span><div class="stat-icon">◷</div></div>
-        <div class="card stat"><div class="stat-label">Đúng giờ</div><div class="stat-value">96 <small>cán bộ</small></div><span class="badge">76.8%</span><div class="stat-icon">✓</div></div>
-        <div class="card stat"><div class="stat-label">Đi muộn</div><div class="stat-value" style="color:#b44a12">12 <small>cán bộ</small></div><span class="badge orange">9.6%</span><div class="stat-icon">⚠</div></div>
-        <div class="card stat"><div class="stat-label">Vắng / chưa Check-out</div><div class="stat-value" style="color:var(--red)">7 <small>vắng</small></div><span class="badge red">17 trường hợp</span><div class="stat-icon">⌛</div></div>
-    </div>
-
-    <div class="card" style="margin-top:20px">
-        <div class="section-head"><div><h2>Công việc cần xử lý hôm nay</h2><p>Các nhiệm vụ quan trọng cho toàn trường</p></div><a class="button" href="#">Xem chi tiết</a></div>
-        <div class="grid grid-3">
-            <div class="card" style="box-shadow:none;background:#f7f9ff"><strong>3 phiếu yêu cầu</strong><p class="muted">đang chờ xử lý</p></div>
-            <div class="card" style="box-shadow:none;background:#f7f9ff"><strong>2 hồ sơ tuyển dụng</strong><p class="muted">mới trong tuần</p></div>
-            <div class="card" style="box-shadow:none;background:#f7f9ff"><strong>2 yêu cầu chấm công</strong><p class="muted">cần rà soát</p></div>
+    <div class="stitch-page hr-module-page">
+        <div class="stitch-context-row"><div class="stitch-context"><span class="stitch-kicker">CỔNG NHÂN SỰ</span><span class="stitch-context-slash">/</span><span>Dashboard</span></div><span class="stitch-kicker">HR WORKSPACE</span></div>
+        <div class="hr-module-heading"><div><h1>Dashboard HR</h1><p>Tổng quan tình hình nhân sự và hoạt động hôm nay.</p></div><div class="stitch-summary-icon primary"><span class="material-symbols-outlined">dashboard</span></div></div>
+        <div class="stitch-summary-grid hr-module-summary">
+            <div class="stitch-summary-card"><div class="stitch-summary-head"><span>Tổng nhân viên</span><span class="stitch-summary-icon"><span class="material-symbols-outlined">groups</span></span></div><div class="stitch-summary-value">{{ $totalEmployees }} <small>hồ sơ</small></div><div class="stitch-summary-caption">Trong hệ thống</div></div>
+            <div class="stitch-summary-card"><div class="stitch-summary-head"><span>Đang làm việc</span><span class="stitch-summary-icon"><span class="material-symbols-outlined">verified_user</span></span></div><div class="stitch-summary-value">{{ $activeEmployees }} <small>nhân viên</small></div><div class="stitch-summary-caption">Tài khoản hoạt động</div></div>
+            <div class="stitch-summary-card"><div class="stitch-summary-head"><span>PYC chờ xử lý</span><span class="stitch-summary-icon secondary"><span class="material-symbols-outlined">pending_actions</span></span></div><div class="stitch-summary-value">{{ $pendingRequests }} <small>phiếu</small></div><div class="stitch-summary-caption">Cần HR phản hồi</div></div>
+            <div class="stitch-summary-card"><div class="stitch-summary-head"><span>Chưa check-out</span><span class="stitch-summary-icon secondary"><span class="material-symbols-outlined">schedule</span></span></div><div class="stitch-summary-value">{{ $notCheckedOut }} <small>trường hợp</small></div><div class="stitch-summary-caption">{{ $lateCount }} trường hợp đi muộn hôm nay</div></div>
+        </div>
+        <div class="stitch-content-grid">
+            <div class="stitch-main-column">
+                <section class="stitch-panel"><div class="stitch-panel-head"><div class="stitch-panel-title"><span class="stitch-panel-icon primary"><span class="material-symbols-outlined">schedule</span></span><div><h2>Chấm công hôm nay</h2><p>Dữ liệu nhân sự đã check-in trong ngày</p></div></div><a class="stitch-profile-link" href="{{ route('hr.attendance.index') }}">Xem tất cả <span class="material-symbols-outlined">arrow_forward</span></a></div><div class="stitch-table-wrap"><table class="stitch-table"><thead><tr><th>Mã nhân viên</th><th>Họ tên</th><th>Chức vụ</th><th>Check-in</th><th>Check-out</th><th>Trạng thái</th></tr></thead><tbody>@forelse($todayAttendances as $attendance)<tr><td><strong>{{ $attendance->employee?->employee_code ?? '—' }}</strong></td><td>{{ $attendance->employee?->full_name ?? '—' }}</td><td>{{ $attendance->employee?->position?->name ?? '—' }}</td><td>{{ $attendance->check_in_at?->format('H:i') ?? '—' }}</td><td>{{ $attendance->check_out_at?->format('H:i') ?? 'Chưa check-out' }}</td><td><span class="stitch-status-pill {{ $attendance->check_out_at ? 'completed' : 'working' }}">{{ $attendance->check_out_at ? 'Đã đủ ca' : 'Đang làm việc' }}</span></td></tr>@empty<tr><td colspan="6" class="stitch-empty">Chưa có dữ liệu chấm công hôm nay.</td></tr>@endforelse</tbody></table></div></section>
+                <section class="stitch-panel"><div class="stitch-panel-head"><div class="stitch-panel-title"><span class="stitch-panel-icon neutral"><span class="material-symbols-outlined">checklist</span></span><div><h2>Công việc gần đây</h2><p>Nhiệm vụ HR đang theo dõi</p></div></div><a class="stitch-profile-link" href="{{ route('hr.tasks') }}">Xem công việc <span class="material-symbols-outlined">arrow_forward</span></a></div><div class="stitch-table-wrap"><table class="stitch-table"><thead><tr><th>Công việc</th><th>Người thực hiện</th><th>Hạn hoàn thành</th><th>Trạng thái</th></tr></thead><tbody>@forelse($recentTasks as $task)<tr><td><strong>{{ $task->title }}</strong></td><td>{{ $task->assignee?->full_name ?? '—' }}</td><td>{{ $task->due_at?->format('d/m/Y') ?? '—' }}</td><td><span class="stitch-status-pill {{ $task->status->value }}">{{ ['in_progress' => 'Đang thực hiện', 'completed' => 'Hoàn thành', 'stopped' => 'Đã dừng'][$task->status->value] ?? $task->status->value }}</span></td></tr>@empty<tr><td colspan="4" class="stitch-empty">Chưa có công việc.</td></tr>@endforelse</tbody></table></div></section>
+            </div>
+            <div class="stitch-side-column"><section class="stitch-panel"><div class="stitch-side-head"><span class="material-symbols-outlined">bolt</span><div><h3>Việc cần xử lý</h3><span>Tổng hợp từ database</span></div></div><div class="stitch-key-list"><div><span>Phiếu yêu cầu</span><strong class="secondary-text">{{ $pendingRequests }} đang chờ</strong></div><div><span>Hồ sơ tuyển dụng</span><strong>{{ $openRecruitment }} đang mở</strong></div><div><span>Đi muộn hôm nay</span><strong class="secondary-text">{{ $lateCount }} trường hợp</strong></div><div><span>Chưa check-out</span><strong>{{ $notCheckedOut }} trường hợp</strong></div></div><div class="stitch-info-note"><span class="material-symbols-outlined">info</span><p>Số liệu được tính trực tiếp từ hồ sơ nhân viên, chấm công, công việc và phiếu yêu cầu.</p></div></section><section class="stitch-panel"><div class="stitch-side-head"><span class="material-symbols-outlined">link</span><div><h3>Truy cập nhanh</h3><span>Các chức năng HR</span></div></div><div class="admin-quick-actions"><a class="button full" href="{{ route('hr.employees') }}"><span class="material-symbols-outlined">groups</span>Quản lý nhân viên</a><a class="button button-light full" href="{{ route('hr.requests') }}"><span class="material-symbols-outlined">receipt_long</span>Xem phiếu yêu cầu</a></div></section></div>
         </div>
     </div>
-
-    <div class="card" style="margin-top:20px">
-        <div class="section-head"><div><h2>Danh sách chấm công hôm nay</h2><p>Cán bộ đang hoạt động trong ca làm việc</p></div><a class="button" href="{{ route('hr.attendance.index') }}">Xem tất cả</a></div>
-        <div class="table-wrap"><table class="data-table"><thead><tr><th>Mã nhân viên</th><th>Họ tên</th><th>Chức vụ</th><th>Giờ check-in</th><th>Thời gian</th><th>Trạng thái</th></tr></thead><tbody>
-            <tr><td>NV001</td><td>Nguyễn Văn A</td><td>Giảng viên</td><td>08:02</td><td>9h20</td><td><span class="badge green">đúng giờ</span></td></tr>
-            <tr><td>NV002</td><td>Lê Thị B</td><td>Chuyên viên</td><td>08:15</td><td>9h35</td><td><span class="badge orange">muộn</span></td></tr>
-            <tr><td>NV003</td><td>Trần Văn C</td><td>Nhân viên</td><td>09:12</td><td>10h25</td><td><span class="badge red">muộn</span></td></tr>
-        </tbody></table></div>
-    </div>
-</div>
 @endsection

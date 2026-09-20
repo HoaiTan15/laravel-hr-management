@@ -17,7 +17,11 @@ class LogoutController extends Controller
     {
         $user = $request->user();
 
-        if ($user && in_array($user->role, [UserRole::HR, UserRole::EMPLOYEE], true) && $this->attendanceService->hasOpenTodayAttendance($user)) {
+        if ($user?->role === UserRole::EMPLOYEE && $this->attendanceService->hasOpenTodayAttendance($user)) {
+            return redirect()->route('employee.home')->with('attendance_modal', 'checkout-confirmation');
+        }
+
+        if ($user && $user->role === UserRole::HR && $this->attendanceService->hasOpenTodayAttendance($user)) {
             return response()->view('attendance.check-out-confirmation', [
                 'attendance' => $this->attendanceService->todayAttendance($user),
                 'role' => strtolower($user->role->value),

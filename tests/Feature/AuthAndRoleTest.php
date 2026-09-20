@@ -114,7 +114,7 @@ class AuthAndRoleTest extends TestCase
 
         $this->actingAs($employee->user)
             ->get(route('attendance.check-in'))
-            ->assertOk();
+            ->assertRedirect(route('employee.home'));
     }
 
     public function test_authenticated_employee_entering_the_application_reaches_the_check_in_gate(): void
