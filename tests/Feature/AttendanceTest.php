@@ -21,7 +21,8 @@ class AttendanceTest extends TestCase
         $employee = $this->createEmployee(UserRole::HR);
 
         $this->actingAs($employee->user)->post(route('attendance.check-in.store'), [])
-            ->assertRedirect(route('attendance.check-in'));
+            ->assertRedirect(route('hr.home'))
+            ->assertSessionHas('attendance_modal', 'checkin-success');
 
         $this->assertDatabaseCount('attendances', 1);
         $this->assertSame(today()->toDateString(), Attendance::first()->work_date->toDateString());
@@ -35,6 +36,18 @@ class AttendanceTest extends TestCase
             ->assertRedirect(route('employee.home'));
 
         $this->assertDatabaseCount('attendances', 1);
+    }
+
+    public function test_hr_can_check_out_and_return_to_dashboard_modal(): void
+    {
+        $hr = $this->createEmployee(UserRole::HR);
+        Attendance::create(['employee_id' => $hr->id, 'work_date' => today(), 'check_in_at' => now()->subHour()]);
+
+        $this->actingAs($hr->user)->post(route('attendance.check-out'))
+            ->assertRedirect(route('hr.home'))
+            ->assertSessionHas('attendance_modal', 'checkout-success');
+
+        $this->assertNotNull(Attendance::first()->fresh()->check_out_at);
     }
 
     public function test_duplicate_check_in_is_rejected(): void

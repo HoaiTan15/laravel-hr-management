@@ -98,7 +98,9 @@ class AuthAndRoleTest extends TestCase
 
         $this->actingAs($admin)->get(route('admin.home'))->assertOk();
         $this->actingAs($admin)->get(route('hr.home'))->assertForbidden();
-        $this->actingAs($hr->user)->get(route('hr.home'))->assertRedirect(route('attendance.check-in'));
+        $this->actingAs($hr->user)->get(route('hr.home'))
+            ->assertOk()
+            ->assertSee('Chấm công đầu ngày');
         $this->actingAs($hr->user)->get(route('admin.home'))->assertForbidden();
     }
 
@@ -157,13 +159,14 @@ class AuthAndRoleTest extends TestCase
         $this->actingAs($admin)->get(route('admin.home'))->assertOk();
     }
 
-    public function test_hr_is_redirected_until_they_have_checked_in(): void
+    public function test_hr_can_open_dashboard_until_they_have_checked_in(): void
     {
         $hr = $this->createEmployee(UserRole::HR);
 
         $this->actingAs($hr->user)
             ->get(route('hr.home'))
-            ->assertRedirect(route('attendance.check-in'));
+            ->assertOk()
+            ->assertSee('Chấm công đầu ngày');
     }
 
     public function test_admin_cannot_access_employee_hr_attendance_entry_routes(): void

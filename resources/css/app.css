@@ -40,6 +40,9 @@
 .button-light:hover{background:#dce9ff}
 .modal-secondary-action{display:flex;align-items:center;justify-content:center;margin-top:12px;min-height:42px;border-radius:9px;background:#eff4ff;color:#004385;font-size:14px;font-weight:700;text-decoration:none}
 .modal-secondary-action:hover{background:#dce9ff}
+.hr-dashboard-checkout-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 20px;padding:14px 16px;border:1px solid #dce9ff;border-radius:10px;background:#fff;box-shadow:0 1px 5px #0f172a0a}
+.hr-dashboard-checkout-bar>div{display:flex;flex-direction:column;gap:3px}.hr-dashboard-checkout-bar strong{color:#002d5d;font-size:13px}.hr-dashboard-checkout-bar span{color:#737782;font-size:11px}
+@media(max-width:700px){.hr-dashboard-checkout-bar{align-items:stretch;flex-direction:column}.hr-dashboard-checkout-bar .button{width:100%}}
 .hr-module-page{min-height:calc(100vh - 80px)}
 .hr-module-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:8px 0 24px}
 .hr-module-heading h1{margin:0;color:#002d5d;font-size:32px;letter-spacing:-.035em}
