@@ -21,15 +21,8 @@ class LogoutController extends Controller
             return redirect()->route('employee.home')->with('attendance_modal', 'checkout-confirmation');
         }
 
-        if ($user && $user->role === UserRole::HR && $this->attendanceService->hasOpenTodayAttendance($user)) {
-            return response()->view('attendance.check-out-confirmation', [
-                'attendance' => $this->attendanceService->todayAttendance($user),
-                'role' => strtolower($user->role->value),
-                'active' => 'dashboard',
-                'title' => 'Xác nhận Check-out',
-                'topTitle' => 'Dashboard cá nhân',
-                'topSub' => 'Xác nhận Check-out',
-            ]);
+        if ($user?->role === UserRole::HR && $this->attendanceService->hasOpenTodayAttendance($user)) {
+            return redirect()->route('hr.home')->with('attendance_modal', 'checkout-confirmation');
         }
 
         Auth::logout();

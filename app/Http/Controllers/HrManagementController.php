@@ -16,8 +16,10 @@ use Illuminate\View\View;
 
 class HrManagementController extends Controller
 {
-    public function dashboard(): View
+    public function dashboard(Request $request): View
     {
+        $user = $request->user()->load('employee.department', 'employee.position');
+        $currentAttendance = $user->employee?->attendances()->whereDate('work_date', today())->first();
         $todayAttendances = \App\Models\Attendance::query()
             ->with(['employee.department', 'employee.position'])
             ->whereDate('work_date', today())
@@ -46,6 +48,9 @@ class HrManagementController extends Controller
             'openRecruitment' => $openRecruitment,
             'lateCount' => $lateCount,
             'notCheckedOut' => $notCheckedOut,
+            'employee' => $user->employee,
+            'attendance' => $currentAttendance,
+            'show' => $request->session()->get('attendance_modal') ?? ($currentAttendance ? null : 'checkin'),
             'todayAttendances' => $todayAttendances,
             'recentTasks' => Task::with('assignee.user')->latest()->limit(5)->get(),
         ]);

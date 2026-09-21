@@ -55,9 +55,10 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
         Route::put('/requests/{requestModel}', [AdminRequestController::class, 'process'])->name('admin.requests.process');
     });
 
-    Route::prefix('hr')->middleware(['role:hr', 'employee.checked.in'])->group(function (): void {
+    Route::prefix('hr')->middleware('role:hr')->group(function (): void {
         Route::get('/', [HrManagementController::class, 'dashboard'])->name('hr.home');
         Route::get('/dashboard', [HrManagementController::class, 'dashboard'])->name('hr.dashboard');
+        Route::middleware('employee.checked.in')->group(function (): void {
         Route::get('/employees', [HrManagementController::class, 'employees'])->name('hr.employees');
         Route::get('/departments', [HrManagementController::class, 'departments'])->name('hr.departments');
         Route::get('/positions', [HrManagementController::class, 'positions'])->name('hr.positions');
@@ -75,6 +76,7 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
         Route::get('/recruitment', [HrManagementController::class, 'recruitment'])->name('hr.recruitment');
         Route::get('/termination', [HrManagementController::class, 'termination'])->name('hr.termination');
         Route::get('/profile', [HrManagementController::class, 'profile'])->name('hr.profile');
+        });
     });
 
     Route::prefix('employee')->middleware('role:employee')->group(function (): void {
