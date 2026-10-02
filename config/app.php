@@ -67,6 +67,14 @@ return [
 
     'timezone' => 'UTC',
 
+    'attendance_gps' => [
+        'workplace_latitude' => (float) env('GPS_WORKPLACE_LAT', 10.762622),
+        'workplace_longitude' => (float) env('GPS_WORKPLACE_LNG', 106.660172),
+        'radius_meters' => (float) env('GPS_RADIUS_METERS', 100),
+        'max_accuracy_meters' => (float) env('GPS_MAX_ACCURACY_METERS', 100),
+        'timeout_seconds' => (int) env('GPS_TIMEOUT_SECONDS', 15),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

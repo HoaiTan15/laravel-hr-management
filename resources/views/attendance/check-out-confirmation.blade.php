@@ -21,7 +21,7 @@
                 <div class="checkout-time"><span class="material-symbols-outlined">schedule</span><span>Bạn đã check-in lúc <strong>{{ $attendance->check_in_at->format('H:i') }}</strong>.</span></div>
                 <p class="lead">Sau khi xác nhận check-out, ca làm việc sẽ kết thúc và bạn có thể đăng xuất.</p>
 
-                <form method="POST" action="{{ route('attendance.check-out') }}">
+                <form method="POST" action="{{ route('attendance.check-out') }}" data-gps-attendance>
                     @csrf
                     <button class="button button-primary attendance-action attendance-action-wide" type="submit"><span class="material-symbols-outlined">check_circle</span>Xác nhận Check-out</button>
                 </form>

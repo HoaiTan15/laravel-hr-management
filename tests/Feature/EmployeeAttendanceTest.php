@@ -19,13 +19,22 @@ class EmployeeAttendanceTest extends TestCase
         parent::tearDown();
     }
 
+    private function validGps(): array
+    {
+        return [
+            'latitude' => (string) config('app.attendance_gps.workplace_latitude'),
+            'longitude' => (string) config('app.attendance_gps.workplace_longitude'),
+            'accuracy' => '10',
+        ];
+    }
+
     public function test_employee_cannot_check_in_twice_on_the_same_day(): void
     {
         $employee = $this->createEmployee();
         Carbon::setTestNow(Carbon::parse('2026-09-19 08:00:00'));
 
-        $this->actingAs($employee->user)->post(route('attendance.check-in.store'))->assertRedirect();
-        $this->actingAs($employee->user)->post(route('attendance.check-in.store'))
+        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), $this->validGps())->assertRedirect();
+        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), $this->validGps())
             ->assertSessionHasErrors('attendance');
 
         $this->assertDatabaseCount('attendances', 1);
@@ -42,11 +51,11 @@ class EmployeeAttendanceTest extends TestCase
         ]);
 
         Carbon::setTestNow(Carbon::parse('2026-09-19 17:00:00'));
-        $this->actingAs($employee->user)->post(route('attendance.check-out'))->assertRedirect();
+        $this->actingAs($employee->user)->post(route('attendance.check-out'), $this->validGps())->assertRedirect();
         $firstCheckout = Attendance::firstOrFail()->check_out_at;
 
         Carbon::setTestNow(Carbon::parse('2026-09-19 18:00:00'));
-        $this->actingAs($employee->user)->post(route('attendance.check-out'))
+        $this->actingAs($employee->user)->post(route('attendance.check-out'), $this->validGps())
             ->assertSessionHasErrors('attendance');
 
         $this->assertTrue($firstCheckout->equalTo(Attendance::firstOrFail()->check_out_at));
@@ -79,7 +88,7 @@ class EmployeeAttendanceTest extends TestCase
         ]);
 
         $this->actingAs($employee->user)
-            ->post(route('attendance.check-out'))
+            ->post(route('attendance.check-out'), $this->validGps())
             ->assertRedirect(route('employee.home'));
 
         $this->assertAuthenticatedAs($employee->user);

@@ -38,9 +38,14 @@ class AttendanceService
         return $employee->attendances()->whereDate('work_date', today())->first();
     }
 
-    public function checkIn(User $user): Attendance
+    public function checkIn(User $user, array $gps): Attendance
     {
         $employee = $this->employeeFor($user);
+        $location = app(GpsLocationService::class)->validateOrFail(
+            $gps['latitude'] ?? null,
+            $gps['longitude'] ?? null,
+            $gps['accuracy'] ?? null,
+        );
         $today = today();
 
         if ($employee->attendances()->whereDate('work_date', $today)->exists()) {
@@ -52,10 +57,13 @@ class AttendanceService
         return $employee->attendances()->create([
             'work_date' => $today,
             'check_in_at' => now(),
+            'check_in_latitude' => $location['latitude'],
+            'check_in_longitude' => $location['longitude'],
+            'check_in_accuracy' => $location['accuracy'],
         ]);
     }
 
-    public function checkOut(User $user): Attendance
+    public function checkOut(User $user, array $gps): Attendance
     {
         $attendance = $this->todayAttendance($user);
 
@@ -71,6 +79,12 @@ class AttendanceService
             ]);
         }
 
+        $location = app(GpsLocationService::class)->validateOrFail(
+            $gps['latitude'] ?? null,
+            $gps['longitude'] ?? null,
+            $gps['accuracy'] ?? null,
+        );
+
         $checkOutAt = now();
 
         if ($checkOutAt->lt($attendance->check_in_at)) {
@@ -79,7 +93,12 @@ class AttendanceService
             ]);
         }
 
-        $attendance->update(['check_out_at' => $checkOutAt]);
+        $attendance->update([
+            'check_out_at' => $checkOutAt,
+            'check_out_latitude' => $location['latitude'],
+            'check_out_longitude' => $location['longitude'],
+            'check_out_accuracy' => $location['accuracy'],
+        ]);
 
         return $attendance->refresh();
     }

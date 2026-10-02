@@ -12,6 +12,8 @@ class Attendance extends Model
 
     protected $fillable = [
         'employee_id', 'work_date', 'check_in_at', 'check_out_at',
+        'check_in_latitude', 'check_in_longitude', 'check_in_accuracy',
+        'check_out_latitude', 'check_out_longitude', 'check_out_accuracy',
         'adjustment_reason', 'adjusted_by',
     ];
 
@@ -21,6 +23,12 @@ class Attendance extends Model
             'work_date' => 'date',
             'check_in_at' => 'datetime',
             'check_out_at' => 'datetime',
+            'check_in_latitude' => 'float',
+            'check_in_longitude' => 'float',
+            'check_in_accuracy' => 'float',
+            'check_out_latitude' => 'float',
+            'check_out_longitude' => 'float',
+            'check_out_accuracy' => 'float',
         ];
     }
 

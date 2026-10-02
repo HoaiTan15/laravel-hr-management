@@ -31,7 +31,11 @@ class AttendanceController extends Controller
 
     public function store(CheckInRequest $request): RedirectResponse
     {
-        $this->attendanceService->checkIn($request->user());
+        $this->attendanceService->checkIn($request->user(), [
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
+            'accuracy' => $request->input('accuracy'),
+        ]);
 
         if ($request->user()->role === UserRole::EMPLOYEE) {
             return redirect()->route('employee.home')->with('attendance_modal', 'checkin-success');
@@ -59,7 +63,11 @@ class AttendanceController extends Controller
 
     public function checkout(CheckOutRequest $request): RedirectResponse
     {
-        $this->attendanceService->checkOut($request->user());
+        $this->attendanceService->checkOut($request->user(), [
+            'latitude' => $request->input('latitude'),
+            'longitude' => $request->input('longitude'),
+            'accuracy' => $request->input('accuracy'),
+        ]);
 
         if ($request->user()->role === UserRole::EMPLOYEE) {
             return redirect()->route('employee.home')->with('attendance_modal', 'checkout-success');

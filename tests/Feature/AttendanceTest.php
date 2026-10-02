@@ -16,11 +16,21 @@ class AttendanceTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** Coordinates exactly at the configured workplace (from .env / config defaults). */
+    private function validGps(): array
+    {
+        return [
+            'latitude' => (string) config('app.attendance_gps.workplace_latitude'),
+            'longitude' => (string) config('app.attendance_gps.workplace_longitude'),
+            'accuracy' => '10',
+        ];
+    }
+
     public function test_hr_can_check_in_without_submitting_an_employee_id(): void
     {
         $employee = $this->createEmployee(UserRole::HR);
 
-        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), [])
+        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), $this->validGps())
             ->assertRedirect(route('hr.home'))
             ->assertSessionHas('attendance_modal', 'checkin-success');
 
@@ -32,7 +42,7 @@ class AttendanceTest extends TestCase
     {
         $employee = $this->createEmployee();
 
-        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), [])
+        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), $this->validGps())
             ->assertRedirect(route('employee.home'));
 
         $this->assertDatabaseCount('attendances', 1);
@@ -43,7 +53,7 @@ class AttendanceTest extends TestCase
         $hr = $this->createEmployee(UserRole::HR);
         Attendance::create(['employee_id' => $hr->id, 'work_date' => today(), 'check_in_at' => now()->subHour()]);
 
-        $this->actingAs($hr->user)->post(route('attendance.check-out'))
+        $this->actingAs($hr->user)->post(route('attendance.check-out'), $this->validGps())
             ->assertRedirect(route('hr.home'))
             ->assertSessionHas('attendance_modal', 'checkout-success');
 
@@ -55,7 +65,7 @@ class AttendanceTest extends TestCase
         $employee = $this->createEmployee();
         Attendance::create(['employee_id' => $employee->id, 'work_date' => today(), 'check_in_at' => now()]);
 
-        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), [])
+        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), $this->validGps())
             ->assertSessionHasErrors('attendance');
 
         $this->assertDatabaseCount('attendances', 1);
@@ -66,7 +76,10 @@ class AttendanceTest extends TestCase
         $employee = $this->createEmployee();
         $other = $this->createEmployee();
 
-        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), ['employee_id' => $other->id]);
+        $this->actingAs($employee->user)->post(route('attendance.check-in.store'), [
+            'employee_id' => $other->id,
+            ...$this->validGps(),
+        ]);
 
         $this->assertDatabaseHas('attendances', ['employee_id' => $employee->id]);
         $this->assertDatabaseMissing('attendances', ['employee_id' => $other->id]);
@@ -77,7 +90,7 @@ class AttendanceTest extends TestCase
         $employee = $this->createEmployee();
         Attendance::create(['employee_id' => $employee->id, 'work_date' => today(), 'check_in_at' => now()->subHour()]);
 
-        $this->actingAs($employee->user)->post(route('attendance.checkout'))
+        $this->actingAs($employee->user)->post(route('attendance.checkout'), $this->validGps())
             ->assertRedirect(route('employee.home'));
 
         $this->assertAuthenticatedAs($employee->user);
@@ -88,7 +101,7 @@ class AttendanceTest extends TestCase
     {
         $employee = $this->createEmployee();
 
-        $this->actingAs($employee->user)->post(route('attendance.checkout'))
+        $this->actingAs($employee->user)->post(route('attendance.checkout'), $this->validGps())
             ->assertSessionHasErrors('attendance');
 
         $this->assertDatabaseCount('attendances', 0);
@@ -99,7 +112,7 @@ class AttendanceTest extends TestCase
         $employee = $this->createEmployee();
         Attendance::create(['employee_id' => $employee->id, 'work_date' => today(), 'check_in_at' => now()->subHour(), 'check_out_at' => now()]);
 
-        $this->actingAs($employee->user)->post(route('attendance.checkout'))
+        $this->actingAs($employee->user)->post(route('attendance.checkout'), $this->validGps())
             ->assertSessionHasErrors('attendance');
     }
 

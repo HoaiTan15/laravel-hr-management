@@ -23,7 +23,7 @@
                 </div>
 
                 @if(!$attendance || !$attendance->check_in_at)
-                    <form method="POST" action="{{ route('attendance.check-in.store') }}">
+                    <form method="POST" action="{{ route('attendance.check-in.store') }}" data-gps-attendance>
                         @csrf
                         <button class="button button-primary attendance-action" type="submit"><span class="material-symbols-outlined">login</span>Check-in ngay</button>
                     </form>
