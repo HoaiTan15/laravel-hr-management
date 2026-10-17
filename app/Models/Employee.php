@@ -62,4 +62,14 @@ class Employee extends Model
     {
         return $this->hasMany(PersonnelProcess::class);
     }
+
+    public function leaveRequests(): HasMany
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function monthlySalaries(): HasMany
+    {
+        return $this->hasMany(MonthlySalary::class);
+    }
 }

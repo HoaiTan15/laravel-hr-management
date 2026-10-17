@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Models\Department;
+use App\Models\Employee;
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -55,14 +59,18 @@ class AdminAccountController extends Controller
             'role' => ['required', Rule::enum(UserRole::class)],
         ]);
 
-        User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => $data['role'],
-            'is_active' => true,
-            'email_verified_at' => now(),
-        ]);
+        DB::transaction(function () use ($data): void {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'role' => $data['role'],
+                'is_active' => true,
+                'email_verified_at' => now(),
+            ]);
+
+            $this->ensureEmployeeProfile($user);
+        });
 
         return redirect()->route('admin.accounts')->with('success', 'Đã tạo tài khoản mới.');
     }
@@ -88,6 +96,35 @@ class AdminAccountController extends Controller
             'is_active' => $request->boolean('is_active'),
         ] + (filled($data['password'] ?? null) ? ['password' => Hash::make($data['password'])] : []));
 
+        $this->ensureEmployeeProfile($user->refresh());
+
         return redirect()->route('admin.accounts')->with('success', 'Đã cập nhật tài khoản.');
+    }
+
+    private function ensureEmployeeProfile(User $user): void
+    {
+        if (! in_array($user->role, [UserRole::HR, UserRole::EMPLOYEE], true) || $user->employee()->exists()) {
+            return;
+        }
+
+        $department = Department::where('is_active', true)->orderBy('id')->first();
+        $position = Position::where('is_active', true)->orderBy('id')->first();
+
+        if (! $department || ! $position) {
+            return;
+        }
+
+        $nextCode = (int) Employee::query()->max('id') + 1;
+
+        Employee::create([
+            'user_id' => $user->id,
+            'department_id' => $department->id,
+            'position_id' => $position->id,
+            'employee_code' => 'NV'.str_pad((string) $nextCode, 4, '0', STR_PAD_LEFT),
+            'full_name' => $user->name,
+            'email' => $user->email,
+            'hire_date' => today(),
+            'employment_status' => 'active',
+        ]);
     }
 }

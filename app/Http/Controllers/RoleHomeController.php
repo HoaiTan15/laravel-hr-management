@@ -84,7 +84,7 @@ class RoleHomeController extends Controller
             'pendingRequestCount' => $pendingRequestCount,
             'show' => $attendanceModal ?? ($attendance ? null : 'checkin'),
             'weekdayLabels' => ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'],
-            'requestTypeLabels' => ['hardware' => 'Phần cứng', 'software' => 'Phần mềm', 'account' => 'Account', 'other' => 'Khác', 'profile_change' => 'Thay đổi hồ sơ'],
+            'requestTypeLabels' => ['hardware' => 'Phần cứng', 'software' => 'Phần mềm', 'account' => 'Tài khoản', 'other' => 'Khác', 'profile_change' => 'Thay đổi hồ sơ'],
             'pendingProfileChange' => null,
         ]);
     }

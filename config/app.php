@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Ho_Chi_Minh'),
 
     'attendance_gps' => [
         'workplace_latitude' => (float) env('GPS_WORKPLACE_LAT', 10.762622),

@@ -16,7 +16,7 @@
             <div class="stitch-sidebar-main">
                 <a class="brand stitch-brand" href="{{ route('hr.home') }}">
                     <div class="brand-mark stitch-brand-mark">H</div>
-                    <div><div class="brand-title stitch-brand-title">HUIT</div><div class="brand-sub stitch-brand-sub">HR Management</div></div>
+                    <div><div class="brand-title stitch-brand-title">HUIT</div><div class="brand-sub stitch-brand-sub">HR MANAGEMENT</div></div>
                 </a>
                 <nav class="nav stitch-nav" aria-label="Điều hướng HR">
                     <a class="stitch-nav-link {{ ($active ?? '') === 'dashboard' ? 'active' : '' }}" href="{{ route('hr.home') }}"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
@@ -26,6 +26,8 @@
                     <a class="stitch-nav-link {{ ($active ?? '') === 'positions' ? 'active' : '' }}" href="{{ route('hr.positions') }}"><span class="material-symbols-outlined">badge</span><span>Chức vụ</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'tasks' ? 'active' : '' }}" href="{{ route('hr.tasks') }}"><span class="material-symbols-outlined">checklist</span><span>Công việc</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'requests' ? 'active' : '' }}" href="{{ route('hr.requests') }}"><span class="material-symbols-outlined">receipt_long</span><span>Phiếu yêu cầu</span></a>
+                    <a class="stitch-nav-link {{ ($active ?? '') === 'leave' ? 'active' : '' }}" href="{{ route('hr.leave.index') }}"><span class="material-symbols-outlined">event_available</span><span>Quản lý nghỉ phép</span></a>
+                    <a class="stitch-nav-link {{ ($active ?? '') === 'salary' ? 'active' : '' }}" href="{{ route('hr.salary.index') }}"><span class="material-symbols-outlined">payments</span><span>Quản lý lương</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'recruitment' ? 'active' : '' }}" href="{{ route('hr.recruitment') }}"><span class="material-symbols-outlined">person_add</span><span>Tuyển dụng</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'termination' ? 'active' : '' }}" href="{{ route('hr.termination') }}"><span class="material-symbols-outlined">person_remove</span><span>Thôi việc</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'profile' ? 'active' : '' }}" href="{{ route('hr.profile') }}"><span class="material-symbols-outlined">account_box</span><span>Hồ sơ cá nhân</span></a>

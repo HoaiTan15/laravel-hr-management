@@ -13,7 +13,7 @@
     <div class="hrms-shell stitch-shell">
         <aside class="hrms-sidebar stitch-sidebar">
             <div class="stitch-sidebar-main">
-                <a class="brand stitch-brand" href="{{ route('admin.home') }}"><div class="brand-mark stitch-brand-mark">H</div><div><div class="brand-title stitch-brand-title">HUIT</div><div class="brand-sub stitch-brand-sub">HR Management</div></div></a>
+                <a class="brand stitch-brand" href="{{ route('admin.home') }}"><div class="brand-mark stitch-brand-mark">H</div><div><div class="brand-title stitch-brand-title">HUIT</div><div class="brand-sub stitch-brand-sub">ADMIN MANAGEMENT</div></div></a>
                 <nav class="nav stitch-nav" aria-label="Điều hướng Admin">
                     <a class="stitch-nav-link {{ request()->routeIs('admin.home', 'admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.home') }}"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
                     <a class="stitch-nav-link {{ request()->routeIs('admin.accounts') ? 'active' : '' }}" href="{{ route('admin.accounts') }}"><span class="material-symbols-outlined">manage_accounts</span><span>Quản lý tài khoản</span></a>

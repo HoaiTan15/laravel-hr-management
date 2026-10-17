@@ -16,62 +16,79 @@
         return 6371000 * 2 * Math.asin(Math.sqrt(a));
     };
 
-    document.querySelectorAll('form[data-gps-attendance]').forEach(form => {
-        const button = form.querySelector('button[type="submit"]');
-        if (!button || !navigator.geolocation) {
-            return;
-        }
+    const initializeGpsForms = () => {
+        document.querySelectorAll('form[data-gps-attendance]').forEach(form => {
+            if (form.dataset.gpsInitialized === 'true') return;
 
-        const status = document.createElement('p');
-        status.setAttribute('role', 'status');
-        status.style.cssText = 'margin:10px 0;color:#64748b;font-size:14px;';
-        form.insertBefore(status, button);
+            const button = form.querySelector('button[type="submit"]');
+            if (!button) return;
 
-        form.addEventListener('submit', event => {
-            if (form.dataset.gpsReady === 'true') return;
-            event.preventDefault();
-            button.disabled = true;
-            status.textContent = 'Đang lấy vị trí GPS... Vui lòng giữ nguyên vị trí.';
+            form.dataset.gpsInitialized = 'true';
 
-            navigator.geolocation.getCurrentPosition(position => {
-                const { latitude, longitude, accuracy } = position.coords;
-                if (accuracy > config.maxAccuracy) {
-                    status.textContent = `Độ chính xác GPS hiện tại (${Math.round(accuracy)}m) chưa đạt yêu cầu (tối đa ${Math.round(config.maxAccuracy)}m).`;
-                    button.disabled = false;
+            const status = document.createElement('p');
+            status.setAttribute('role', 'status');
+            status.style.cssText = 'margin:10px 0;color:#64748b;font-size:14px;';
+            form.insertBefore(status, button);
+
+            form.addEventListener('submit', event => {
+                if (form.dataset.gpsReady === 'true') return;
+
+                event.preventDefault();
+
+                if (!navigator.geolocation) {
+                    status.textContent = 'Trình duyệt không hỗ trợ GPS. Hãy mở bằng Chrome hoặc Edge.';
                     return;
                 }
 
-                const distance = distanceMeters(latitude, longitude, config.latitude, config.longitude);
-                if (distance > config.radius) {
-                    status.textContent = `Bạn đang cách nơi làm việc khoảng ${Math.round(distance)}m, vượt bán kính cho phép ${Math.round(config.radius)}m.`;
-                    button.disabled = false;
-                    return;
-                }
+                button.disabled = true;
+                status.textContent = 'Đang lấy vị trí GPS... Vui lòng giữ nguyên vị trí.';
 
-                [['latitude', latitude], ['longitude', longitude], ['accuracy', accuracy]].forEach(([name, value]) => {
-                    let input = form.querySelector(`input[name="${name}"]`);
-                    if (!input) {
-                        input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = name;
-                        form.appendChild(input);
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude, accuracy } = position.coords;
+                    if (accuracy > config.maxAccuracy) {
+                        status.textContent = `Độ chính xác GPS hiện tại (${Math.round(accuracy)}m) chưa đạt yêu cầu (tối đa ${Math.round(config.maxAccuracy)}m).`;
+                        button.disabled = false;
+                        return;
                     }
-                    input.value = value;
-                });
-                form.dataset.gpsReady = 'true';
-                status.textContent = 'Đã xác định vị trí. Đang gửi dữ liệu...';
-                form.submit();
-            }, error => {
-                const messages = {
-                    1: 'Bạn đã từ chối quyền truy cập vị trí. Hãy cho phép GPS trong trình duyệt rồi thử lại.',
-                    2: 'Không lấy được vị trí GPS. Hãy kiểm tra GPS/kết nối mạng rồi thử lại.',
-                    3: 'Lấy vị trí GPS quá thời gian. Hãy thử lại ở nơi có tín hiệu tốt hơn.',
-                };
-                status.textContent = messages[error.code] || 'Không lấy được vị trí GPS. Vui lòng thử lại.';
-                button.disabled = false;
-            }, { enableHighAccuracy: true, timeout: {{ (int) config('app.attendance_gps.timeout_seconds') * 1000 }}, maximumAge: 0 });
+
+                    const distance = distanceMeters(latitude, longitude, config.latitude, config.longitude);
+                    if (distance > config.radius) {
+                        status.textContent = `Bạn đang cách nơi làm việc khoảng ${Math.round(distance)}m, vượt bán kính cho phép ${Math.round(config.radius)}m.`;
+                        button.disabled = false;
+                        return;
+                    }
+
+                    [['latitude', latitude], ['longitude', longitude], ['accuracy', accuracy]].forEach(([name, value]) => {
+                        let input = form.querySelector(`input[name="${name}"]`);
+                        if (!input) {
+                            input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = name;
+                            form.appendChild(input);
+                        }
+                        input.value = value;
+                    });
+                    form.dataset.gpsReady = 'true';
+                    status.textContent = 'Đã xác định vị trí. Đang gửi dữ liệu...';
+                    form.submit();
+                }, error => {
+                    const messages = {
+                        1: 'Bạn đã từ chối quyền truy cập vị trí. Hãy cho phép GPS trong trình duyệt rồi thử lại.',
+                        2: 'Không lấy được vị trí GPS. Hãy kiểm tra GPS/kết nối mạng rồi thử lại.',
+                        3: 'Lấy vị trí GPS quá thời gian. Hãy thử lại ở nơi có tín hiệu tốt hơn.',
+                    };
+                    status.textContent = messages[error.code] || 'Không lấy được vị trí GPS. Vui lòng thử lại.';
+                    button.disabled = false;
+                }, { enableHighAccuracy: true, timeout: {{ (int) config('app.attendance_gps.timeout_seconds') * 1000 }}, maximumAge: 0 });
+            });
         });
-    });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeGpsForms);
+    } else {
+        initializeGpsForms();
+    }
 })();
 </script>
 @endonce
