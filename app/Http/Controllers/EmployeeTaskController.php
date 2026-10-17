@@ -16,7 +16,7 @@ class EmployeeTaskController extends Controller
 
         $filters = $request->validate([
             'q' => ['nullable', 'string', 'max:120'],
-            'status' => ['nullable', 'in:in_progress,completed,stopped'],
+            'status' => ['nullable', 'in:pending,in_progress,completed,stopped'],
             'due_from' => ['nullable', 'date'],
             'due_to' => ['nullable', 'date', 'after_or_equal:due_from'],
         ]);

@@ -69,4 +69,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(PersonnelProcess::class, 'completed_by');
     }
+
+    public function requestedLeave(): HasMany
+    {
+        return $this->hasMany(LeaveRequest::class, 'requested_by');
+    }
+
+    public function reviewedLeave(): HasMany
+    {
+        return $this->hasMany(LeaveRequest::class, 'reviewed_by');
+    }
 }

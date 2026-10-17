@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Enums\PersonnelProcessStatus;
 use App\Enums\PersonnelProcessType;
+use App\Enums\LeaveDurationType;
+use App\Enums\LeaveStatus;
 use App\Enums\RequestStatus;
 use App\Enums\RequestType;
 use App\Enums\TaskStatus;
@@ -13,6 +15,7 @@ use App\Models\PersonnelProcess;
 use App\Models\Request;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\LeaveRequest;
 use Illuminate\Database\Seeder;
 
 class DemoDataSeeder extends Seeder
@@ -58,6 +61,37 @@ class DemoDataSeeder extends Seeder
         Request::updateOrCreate(
             ['created_by' => $employeeOne->user_id, 'type' => RequestType::OTHER],
             ['type' => RequestType::OTHER, 'payload' => ['title' => 'Demo support request', 'content' => 'Demo support content.'], 'status' => RequestStatus::PENDING],
+        );
+
+        LeaveRequest::updateOrCreate(
+            ['employee_id' => $employeeOne->id, 'start_date' => '2026-09-21'],
+            [
+                'requested_by' => $employeeOne->user_id,
+                'end_date' => '2026-09-21',
+                'duration_type' => LeaveDurationType::FULL_DAY,
+                'requested_days' => 1,
+                'paid_leave_days' => 1,
+                'unpaid_leave_days' => 0,
+                'reason' => 'Demo nghỉ phép có lương.',
+                'status' => LeaveStatus::APPROVED,
+                'reviewed_by' => $hr->id,
+                'reviewed_at' => '2026-09-15 10:00:00',
+                'review_note' => 'Đã duyệt demo.',
+            ],
+        );
+        LeaveRequest::updateOrCreate(
+            ['employee_id' => $employeeTwo->id, 'start_date' => '2026-09-23'],
+            [
+                'requested_by' => $employeeTwo->user_id,
+                'end_date' => '2026-09-23',
+                'duration_type' => LeaveDurationType::HALF_DAY,
+                'half_day_period' => 'afternoon',
+                'requested_days' => 0.5,
+                'paid_leave_days' => 0,
+                'unpaid_leave_days' => 0,
+                'reason' => 'Demo nghỉ nửa ngày để hiển thị luồng chờ duyệt.',
+                'status' => LeaveStatus::PENDING,
+            ],
         );
 
         PersonnelProcess::updateOrCreate(

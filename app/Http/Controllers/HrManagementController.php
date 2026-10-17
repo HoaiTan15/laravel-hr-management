@@ -11,7 +11,9 @@ use App\Models\PersonnelProcess;
 use App\Models\Position;
 use App\Models\Request as EmployeeRequest;
 use App\Models\Task;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class HrManagementController extends Controller
@@ -171,6 +173,27 @@ class HrManagementController extends Controller
             'user' => $user,
             'employee' => $user->employee,
         ]);
+    }
+
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        $user = $request->user()->load('employee');
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'address' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $user->update(['name' => $data['name'], 'email' => $data['email']]);
+        $user->employee?->update([
+            'full_name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'] ?? null,
+            'address' => $data['address'] ?? null,
+        ]);
+
+        return redirect()->route('hr.profile')->with('success', 'Đã cập nhật hồ sơ cá nhân.');
     }
 
     private function module(string $active, string $title, string $description, string $icon, array $data): View
