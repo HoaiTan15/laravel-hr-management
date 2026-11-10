@@ -22,6 +22,7 @@
                     <a class="stitch-nav-link {{ ($active ?? '') === 'requests' ? 'active' : '' }}" href="{{ route('employee.requests.index') }}"><span class="material-symbols-outlined">receipt_long</span><span>Phiếu yêu cầu</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'leave' ? 'active' : '' }}" href="{{ route('employee.leave.index') }}"><span class="material-symbols-outlined">event_available</span><span>Nghỉ phép</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'salary' ? 'active' : '' }}" href="{{ route('employee.salary.index') }}"><span class="material-symbols-outlined">payments</span><span>Lương của tôi</span></a>
+                    <a class="stitch-nav-link {{ ($active ?? '') === 'parking' ? 'active' : '' }}" href="{{ route('employee.parking') }}"><span class="material-symbols-outlined">two_wheeler</span><span>Xe của tôi</span></a>
                 </nav>
             </div>
             <div class="sidebar-bottom stitch-sidebar-bottom"><div class="stitch-sidebar-divider"></div><form method="POST" action="{{ route('logout') }}">@csrf<button class="logout-link stitch-logout" type="submit"><span class="material-symbols-outlined">logout</span><span>Đăng xuất</span></button></form></div>

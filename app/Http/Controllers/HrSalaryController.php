@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\EmploymentStatus;
 use App\Models\Employee;
 use App\Services\SalaryService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -21,7 +22,7 @@ class HrSalaryController extends Controller
             ->where('employment_status', EmploymentStatus::ACTIVE)
             ->orderBy('employee_code')
             ->get();
-        $salaries = collect($this->salaryService->calculateForEmployees($employees, $year, $month));
+        $salaries = new Collection($this->salaryService->calculateForEmployees($employees, $year, $month));
         $salaries->load('employee.department');
 
         return view('hr.salary.index', [

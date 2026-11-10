@@ -105,7 +105,6 @@ php artisan route:list
 php artisan migrate:status
 composer validate
 composer dump-autoload
-php artisan test
 ```
 
 Chỉ chạy `php artisan migrate:status` hoặc `migrate` sau khi MySQL và database `hr_management` sẵn sàng.
@@ -127,7 +126,6 @@ public/                     Document root duy nhất của web server
 resources/views/            Blade templates
 routes/web.php              Web routes
 storage/                    Logs, cache, uploaded/local files
-tests/                      Feature and unit tests
 docs/                       Architecture and handoff documentation
 ```
 
@@ -159,7 +157,6 @@ Chi tiết acceptance criteria và test mapping:
 - [Development plan](docs/DEVELOPMENT-PLAN.md)
 - [Acceptance criteria](docs/ACCEPTANCE-CRITERIA.md)
 - [Coding conventions](docs/CODING-CONVENTIONS.md)
-- [Testing strategy](docs/TESTING.md)
 
 ## Handoff notes
 

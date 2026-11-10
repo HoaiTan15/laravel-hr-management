@@ -31,6 +31,7 @@
                     <a class="stitch-nav-link {{ ($active ?? '') === 'recruitment' ? 'active' : '' }}" href="{{ route('hr.recruitment') }}"><span class="material-symbols-outlined">person_add</span><span>Tuyển dụng</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'termination' ? 'active' : '' }}" href="{{ route('hr.termination') }}"><span class="material-symbols-outlined">person_remove</span><span>Thôi việc</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'profile' ? 'active' : '' }}" href="{{ route('hr.profile') }}"><span class="material-symbols-outlined">account_box</span><span>Hồ sơ cá nhân</span></a>
+                    <a class="stitch-nav-link {{ ($active ?? '') === 'parking' ? 'active' : '' }}" href="{{ route('hr.parking') }}"><span class="material-symbols-outlined">local_parking</span><span>Quản lý gửi xe</span></a>
                 </nav>
             </div>
             <div class="sidebar-bottom stitch-sidebar-bottom">

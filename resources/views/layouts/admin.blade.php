@@ -19,6 +19,7 @@
                     <a class="stitch-nav-link {{ request()->routeIs('admin.accounts') ? 'active' : '' }}" href="{{ route('admin.accounts') }}"><span class="material-symbols-outlined">manage_accounts</span><span>Quản lý tài khoản</span></a>
                     <a class="stitch-nav-link {{ request()->routeIs('admin.requests*') ? 'active' : '' }}" href="{{ route('admin.requests') }}"><span class="material-symbols-outlined">receipt_long</span><span>Phiếu yêu cầu</span></a>
                     <a class="stitch-nav-link {{ request()->routeIs('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}"><span class="material-symbols-outlined">account_box</span><span>Hồ sơ cá nhân</span></a>
+                    <a class="stitch-nav-link {{ request()->routeIs('admin.attendance-location*') ? 'active' : '' }}" href="{{ route('admin.attendance-location') }}"><span class="material-symbols-outlined">location_on</span><span>Tọa độ chấm công</span></a>
                 </nav>
             </div>
             <div class="sidebar-bottom stitch-sidebar-bottom"><div class="stitch-sidebar-divider"></div><form method="POST" action="{{ route('logout') }}">@csrf<button class="logout-link stitch-logout" type="submit"><span class="material-symbols-outlined">logout</span><span>Đăng xuất</span></button></form></div>

@@ -1,11 +1,12 @@
 @once
+@php($workplace = app(\App\Services\GpsLocationService::class)->workplace())
 <script>
 (() => {
     const config = {
-        latitude: {{ Js::from(config('app.attendance_gps.workplace_latitude')) }},
-        longitude: {{ Js::from(config('app.attendance_gps.workplace_longitude')) }},
-        radius: {{ Js::from(config('app.attendance_gps.radius_meters')) }},
-        maxAccuracy: {{ Js::from(config('app.attendance_gps.max_accuracy_meters')) }},
+        latitude: {{ Js::from($workplace['latitude']) }},
+        longitude: {{ Js::from($workplace['longitude']) }},
+        radius: {{ Js::from($workplace['radius_meters']) }},
+        maxAccuracy: {{ Js::from($workplace['max_accuracy_meters']) }},
     };
 
     const distanceMeters = (lat1, lng1, lat2, lng2) => {

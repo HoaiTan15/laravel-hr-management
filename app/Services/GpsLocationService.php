@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -25,9 +26,19 @@ class GpsLocationService
         return 2 * $earthRadius * asin(sqrt($a));
     }
 
-    /** Workplace coordinates from config (.env). */
+    /** Saved workplace coordinates, falling back to the server configuration. */
     public function workplace(): array
     {
+        $location = DB::table('attendance_locations')->find(1);
+        if ($location && ! $location->use_server_defaults) {
+            return [
+                'latitude' => (float) $location->latitude,
+                'longitude' => (float) $location->longitude,
+                'radius_meters' => (float) $location->radius_meters,
+                'max_accuracy_meters' => (float) $location->max_accuracy_meters,
+            ];
+        }
+
         return [
             'latitude' => (float) Config::get('app.attendance_gps.workplace_latitude'),
             'longitude' => (float) Config::get('app.attendance_gps.workplace_longitude'),

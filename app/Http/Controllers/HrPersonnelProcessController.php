@@ -7,6 +7,7 @@ use App\Enums\PersonnelProcessStatus;
 use App\Enums\PersonnelProcessType;
 use App\Models\Employee;
 use App\Models\PersonnelProcess;
+use App\Services\ParkingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,18 @@ class HrPersonnelProcessController extends Controller
         $data = $this->validated($request, $type);
         $data['created_by'] = $request->user()->id;
         $data['type'] = $type;
+
+        if ($data['status'] === PersonnelProcessStatus::COMPLETED->value) {
+            if (empty($data['employee_id'])) {
+                return back()->withInput()->withErrors(['employee_id' => 'Phải chọn nhân viên trước khi hoàn tất quy trình.']);
+            }
+
+            return DB::transaction(function () use ($data, $request): RedirectResponse {
+                $process = PersonnelProcess::create(array_replace($data, ['status' => PersonnelProcessStatus::IN_PROGRESS->value]));
+
+                return $this->update($request, $process);
+            });
+        }
 
         PersonnelProcess::create($data);
 
@@ -96,6 +109,7 @@ class HrPersonnelProcessController extends Controller
                         'termination_reason' => $data['reason'] ?? null,
                     ]);
                     $employee->user?->update(['is_active' => false]);
+                    app(ParkingService::class)->endForEmployee($employee, $request->user(), 'Kết thúc quyền gửi xe do hoàn tất quy trình thôi việc.');
                 } else {
                     $employee->update([
                         'employment_status' => EmploymentStatus::ACTIVE,
