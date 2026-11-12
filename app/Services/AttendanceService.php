@@ -120,6 +120,11 @@ class AttendanceService
             return 'not_checked_out';
         }
 
-        return $attendance->check_in_at->format('H:i') > self::LATE_AFTER ? 'late' : 'on_time';
+        return $this->isLate($attendance) ? 'late' : 'on_time';
+    }
+
+    public function isLate(Attendance $attendance): bool
+    {
+        return $attendance->check_in_at->format('H:i:s') > self::LATE_AFTER.':00';
     }
 }

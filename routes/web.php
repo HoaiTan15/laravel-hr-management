@@ -25,6 +25,7 @@ use App\Http\Controllers\HrPositionController;
 use App\Http\Controllers\HrRequestController;
 use App\Http\Controllers\HrSalaryController;
 use App\Http\Controllers\HrTaskController;
+use App\Http\Controllers\PersonalAttendanceController;
 use App\Http\Controllers\RoleHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +72,7 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
     Route::prefix('hr')->middleware('role:hr')->group(function (): void {
         Route::get('/', [HrManagementController::class, 'dashboard'])->name('hr.home');
         Route::get('/dashboard', [HrManagementController::class, 'dashboard'])->name('hr.dashboard');
+        Route::get('/attendance/personal', [PersonalAttendanceController::class, 'index'])->name('hr.attendance.personal');
         Route::middleware('employee.checked.in')->group(function (): void {
             Route::get('/employees', [HrManagementController::class, 'employees'])->name('hr.employees');
             Route::get('/employees/create', [HrEmployeeController::class, 'create'])->name('hr.employees.create');
@@ -133,6 +135,7 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
 
     Route::prefix('employee')->middleware('role:employee')->group(function (): void {
         Route::get('/', [RoleHomeController::class, 'employee'])->name('employee.home');
+        Route::get('/attendance', [PersonalAttendanceController::class, 'index'])->name('employee.attendance.index');
 
         Route::middleware('employee.checked.in')->group(function (): void {
             Route::get('/tasks', [EmployeeTaskController::class, 'index'])->name('employee.tasks.index');

@@ -20,6 +20,7 @@
                 </a>
                 <nav class="nav stitch-nav" aria-label="Điều hướng HR">
                     <a class="stitch-nav-link {{ ($active ?? '') === 'dashboard' ? 'active' : '' }}" href="{{ route('hr.home') }}"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+                    <a class="stitch-nav-link {{ ($active ?? '') === 'personal-attendance' ? 'active' : '' }}" href="{{ route('hr.attendance.personal') }}"><span class="material-symbols-outlined">calendar_month</span><span>Chấm công của tôi</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'attendance' ? 'active' : '' }}" href="{{ route('hr.attendance.index') }}"><span class="material-symbols-outlined">schedule</span><span>Quản lý chấm công</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'employees' ? 'active' : '' }}" href="{{ route('hr.employees') }}"><span class="material-symbols-outlined">groups</span><span>Quản lý nhân viên</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'departments' ? 'active' : '' }}" href="{{ route('hr.departments') }}"><span class="material-symbols-outlined">corporate_fare</span><span>Phòng ban</span></a>

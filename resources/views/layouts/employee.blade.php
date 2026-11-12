@@ -17,6 +17,7 @@
                 <div class="brand stitch-brand"><div class="brand-mark stitch-brand-mark">H</div><div><div class="brand-title stitch-brand-title">HUIT</div><div class="brand-sub stitch-brand-sub">EMPLOYEE PORTAL</div></div></div>
                 <nav class="nav stitch-nav">
                     <a class="stitch-nav-link {{ ($active ?? '') === 'dashboard' ? 'active' : '' }}" href="{{ route('employee.home') }}"><span class="material-symbols-outlined">dashboard</span><span>Dashboard cá nhân</span></a>
+                    <a class="stitch-nav-link {{ ($active ?? '') === 'attendance' ? 'active' : '' }}" href="{{ route('employee.attendance.index') }}"><span class="material-symbols-outlined">calendar_month</span><span>Chấm công của tôi</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'tasks' ? 'active' : '' }}" href="{{ route('employee.tasks.index') }}"><span class="material-symbols-outlined">task_alt</span><span>Xem danh sách công việc</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'profile' ? 'active' : '' }}" href="{{ route('employee.profile') }}"><span class="material-symbols-outlined">account_box</span><span>Xem hồ sơ cá nhân</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'requests' ? 'active' : '' }}" href="{{ route('employee.requests.index') }}"><span class="material-symbols-outlined">receipt_long</span><span>Phiếu yêu cầu</span></a>

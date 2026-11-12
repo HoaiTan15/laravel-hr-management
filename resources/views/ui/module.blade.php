@@ -69,7 +69,7 @@
     <div class="stitch-context-row">
         <div><div class="stitch-context">HR / Workspace / {{ $sectionTitle }}</div><h1>{{ $sectionTitle }}</h1><p class="stitch-subtitle">{{ $description }}</p></div>
         <div class="toolbar">
-            @if($active === 'employees') <a class="button" href="{{ route('hr.employees.create') }}">+ Thêm nhân viên</a>
+            @if($active === 'employees') <a class="button" href="{{ route('hr.employees.create') }}">+ Thêm nhân viên</a> <a class="button button-light" href="{{ route('hr.employees', array_merge(request()->only('search', 'department_id'), ['export' => 'xlsx'])) }}">Xuất Excel</a>
             @elseif($active === 'departments') <a class="button" href="{{ route('hr.departments.create') }}">+ Thêm phòng ban</a>
             @elseif($active === 'positions') <a class="button" href="{{ route('hr.positions.create') }}">+ Thêm chức vụ</a>
             @elseif($active === 'tasks') <a class="button" href="{{ route('hr.tasks.create') }}">+ Giao công việc</a>

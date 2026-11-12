@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Enums\EmploymentStatus;
 use App\Enums\PersonnelProcessType;
 use App\Enums\RequestStatus;
+use App\Models\Attendance;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\PersonnelProcess;
 use App\Models\Position;
 use App\Models\Request as EmployeeRequest;
 use App\Models\Task;
+use App\Services\ExcelExportService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class HrManagementController extends Controller
 {
@@ -22,7 +25,7 @@ class HrManagementController extends Controller
     {
         $user = $request->user()->load('employee.department', 'employee.position');
         $currentAttendance = $user->employee?->attendances()->whereDate('work_date', today())->first();
-        $todayAttendances = \App\Models\Attendance::query()
+        $todayAttendances = Attendance::query()
             ->with(['employee.department', 'employee.position'])
             ->whereDate('work_date', today())
             ->whereNotNull('check_in_at')
@@ -58,7 +61,7 @@ class HrManagementController extends Controller
         ]);
     }
 
-    public function employees(Request $request): View
+    public function employees(Request $request): View|StreamedResponse
     {
         $employees = Employee::query()
             ->with(['user', 'department', 'position'])
@@ -71,9 +74,19 @@ class HrManagementController extends Controller
                 });
             })
             ->when($request->filled('department_id'), fn ($query) => $query->where('department_id', $request->integer('department_id')))
-            ->latest()
-            ->paginate(15)
-            ->withQueryString();
+            ->latest();
+
+        if ($request->input('export') === 'xlsx') {
+            return app(ExcelExportService::class)->download('nhan-vien.xlsx',
+                ['Mã NV', 'Họ tên', 'Email', 'Phòng ban', 'Chức vụ', 'Trạng thái'],
+                $employees->lazy()->map(fn (Employee $employee): array => [
+                    $employee->employee_code, $employee->full_name, $employee->email ?: $employee->user?->email,
+                    $employee->department?->name, $employee->position?->name,
+                    $employee->employment_status === EmploymentStatus::ACTIVE ? 'Đang làm việc' : 'Đã nghỉ việc',
+                ]));
+        }
+
+        $employees = $employees->paginate(15)->withQueryString();
 
         return $this->module('employees', 'Quản lý nhân viên', 'Danh sách nhân sự đang làm việc và thông tin phân bổ theo đơn vị.', 'groups', [
             'employees' => $employees,
