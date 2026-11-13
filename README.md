@@ -91,7 +91,7 @@ D:\HUIT\PHP\hr-management\public
 ```
 
 Có thể chạy server development để kiểm tra nhanh:
-
+set "PATH=C:\laragon\bin\php\php-8.3.33-Win32-vs16-x64;%PATH%"
 ```bash
 php artisan serve
 ```
