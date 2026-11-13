@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Enums\UserRole;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function __invoke(Request $request): View|RedirectResponse
+    public function __invoke(Request $request): RedirectResponse
     {
         if ($request->user()?->role === UserRole::ADMIN) {
             return redirect()->route('admin.home');
@@ -23,6 +22,6 @@ class HomeController extends Controller
             return redirect()->route('employee.home');
         }
 
-        return view('welcome');
+        return redirect()->route('login');
     }
 }

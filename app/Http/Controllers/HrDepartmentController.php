@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -80,6 +79,14 @@ class HrDepartmentController extends Controller
 
     public function destroy(Department $department): RedirectResponse
     {
+        if ($department->allowanceRules()->exists()) {
+            return back()->withErrors(['department' => 'Phòng ban đang được dùng trong cấu hình phụ cấp. Hãy cập nhật phạm vi áp dụng hoặc khóa phòng ban thay vì xóa.']);
+        }
+
+        if ($department->penaltyRules()->exists()) {
+            return back()->withErrors(['department' => 'Phòng ban đang được dùng trong cấu hình tiền phạt. Hãy cập nhật phạm vi áp dụng hoặc khóa phòng ban thay vì xóa.']);
+        }
+
         if ($department->employees()->exists()) {
             return back()->withErrors(['department' => 'Không thể xóa phòng ban đang có nhân viên. Hãy khóa phòng ban thay vì xóa.']);
         }

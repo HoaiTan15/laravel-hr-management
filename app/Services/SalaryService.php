@@ -2,20 +2,34 @@
 
 namespace App\Services;
 
-use App\Enums\LeaveDurationType;
 use App\Enums\LeaveStatus;
+use App\Enums\SalaryStatus;
 use App\Models\Employee;
 use App\Models\LeaveRequest;
 use App\Models\MonthlySalary;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\DB;
 
 class SalaryService
 {
     public const DEFAULT_MONTHLY_SALARY = 15000000.0;
 
-    public function __construct(private readonly LeaveService $leaveService) {}
+    public function __construct(private readonly LeaveService $leaveService, private readonly PayrollAdjustmentService $adjustmentService) {}
 
     public function calculate(Employee $employee, int $year, int $month): MonthlySalary
+    {
+        return DB::transaction(function () use ($employee, $year, $month): MonthlySalary {
+            $salary = MonthlySalary::firstOrCreate(['employee_id' => $employee->id, 'year' => $year, 'month' => $month]);
+            $salary = MonthlySalary::whereKey($salary->id)->lockForUpdate()->firstOrFail();
+            if ($salary->status !== SalaryStatus::DRAFT) {
+                return $salary;
+            }
+
+            return $this->calculateDraft($employee, $year, $month, $salary);
+        });
+    }
+
+    private function calculateDraft(Employee $employee, int $year, int $month, MonthlySalary $salary): MonthlySalary
     {
         $monthStart = CarbonImmutable::create($year, $month, 1)->startOfDay();
         $monthEnd = $monthStart->endOfMonth()->startOfDay();
@@ -47,9 +61,11 @@ class SalaryService
         $dailySalary = $workingDays > 0 ? $baseSalary / $workingDays : 0.0;
         $workedDays = max($workingDays - $approvedLeaveDays, 0);
         $totalSalary = max($baseSalary - ($unpaidLeaveDays * $dailySalary), 0);
+        $adjustments = $this->adjustmentService->calculate($employee, $monthStart, $monthEnd, $leaves, $salary->manual_penalties ?? []);
+        $allowanceTotal = array_sum(array_column($adjustments['allowances'], 'total'));
+        $penaltyTotal = array_sum(array_column($adjustments['penalties'], 'total'));
 
-        return MonthlySalary::updateOrCreate(
-            ['employee_id' => $employee->id, 'year' => $year, 'month' => $month],
+        $salary->fill(
             [
                 'base_salary' => $baseSalary,
                 'working_days' => $workingDays,
@@ -58,10 +74,17 @@ class SalaryService
                 'paid_leave_days' => $paidLeaveDays,
                 'unpaid_leave_days' => $unpaidLeaveDays,
                 'daily_salary' => $dailySalary,
-                'total_salary' => $totalSalary,
+                'salary_before_adjustments' => round($totalSalary, 2),
+                'actual_worked_days' => $adjustments['actual_days'],
+                'allowance_total' => $allowanceTotal,
+                'penalty_total' => $penaltyTotal,
+                'adjustment_details' => $adjustments,
+                'total_salary' => round(max($totalSalary + $allowanceTotal - $penaltyTotal, 0), 2),
                 'calculated_at' => now(),
             ],
-        );
+        )->save();
+
+        return $salary;
     }
 
     public function calculateForEmployees(iterable $employees, int $year, int $month): array

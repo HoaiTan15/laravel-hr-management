@@ -29,6 +29,11 @@
                     <a class="stitch-nav-link {{ ($active ?? '') === 'requests' ? 'active' : '' }}" href="{{ route('hr.requests') }}"><span class="material-symbols-outlined">receipt_long</span><span>Phiếu yêu cầu</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'leave' ? 'active' : '' }}" href="{{ route('hr.leave.index') }}"><span class="material-symbols-outlined">event_available</span><span>Quản lý nghỉ phép</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'salary' ? 'active' : '' }}" href="{{ route('hr.salary.index') }}"><span class="material-symbols-outlined">payments</span><span>Quản lý lương</span></a>
+                    <details class="payroll-navigation" @if(in_array($active ?? '', ['penalty-rules', 'allowance-rules'])) open @endif>
+                        <summary><span class="material-symbols-outlined">tune</span><span>Cấu hình tính lương</span><span class="material-symbols-outlined payroll-chevron">expand_more</span></summary>
+                        <a class="stitch-nav-link payroll-subnav {{ ($active ?? '') === 'penalty-rules' ? 'active' : '' }}" href="{{ route('hr.penalty-rules.index') }}">Cấu hình tiền phạt</a>
+                        <a class="stitch-nav-link payroll-subnav {{ ($active ?? '') === 'allowance-rules' ? 'active' : '' }}" href="{{ route('hr.allowance-rules.index') }}">Cấu hình phụ cấp</a>
+                    </details>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'recruitment' ? 'active' : '' }}" href="{{ route('hr.recruitment') }}"><span class="material-symbols-outlined">person_add</span><span>Tuyển dụng</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'termination' ? 'active' : '' }}" href="{{ route('hr.termination') }}"><span class="material-symbols-outlined">person_remove</span><span>Thôi việc</span></a>
                     <a class="stitch-nav-link {{ ($active ?? '') === 'profile' ? 'active' : '' }}" href="{{ route('hr.profile') }}"><span class="material-symbols-outlined">account_box</span><span>Hồ sơ cá nhân</span></a>
@@ -48,7 +53,7 @@
                 <div class="stitch-greeting"><div class="stitch-greeting-line"><span class="top-title">{{ $topTitle ?? 'Cổng nhân sự' }}</span><span class="stitch-dot">•</span><span class="stitch-hello">{{ $topSub ?? 'Không gian làm việc HR' }}</span></div></div>
                 <div class="stitch-top-actions">
                     <button class="stitch-notification" type="button" aria-label="Thông báo"><span class="material-symbols-outlined">notifications</span><span class="stitch-notification-dot"></span></button>
-                    <div class="user-chip stitch-user-chip"><div class="avatar stitch-user-avatar"><span class="material-symbols-outlined">person</span></div><div class="stitch-user-copy"><strong>{{ $employee->full_name ?? auth()->user()->name ?? 'Người dùng' }}</strong><small>HR</small></div></div>
+                    <div class="user-chip stitch-user-chip"><div class="avatar stitch-user-avatar"><span class="material-symbols-outlined">person</span></div><div class="stitch-user-copy"><strong>{{ auth()->user()?->employee?->full_name ?? auth()->user()->name ?? 'Người dùng' }}</strong><small>HR</small></div></div>
                 </div>
             </header>
             @if (session('success'))

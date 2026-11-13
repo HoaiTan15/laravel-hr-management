@@ -15,11 +15,13 @@ use App\Http\Controllers\EmployeeRequestController;
 use App\Http\Controllers\EmployeeSalaryController;
 use App\Http\Controllers\EmployeeTaskController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HrAllowanceRuleController;
 use App\Http\Controllers\HrDepartmentController;
 use App\Http\Controllers\HrEmployeeController;
 use App\Http\Controllers\HrLeaveController;
 use App\Http\Controllers\HrManagementController;
 use App\Http\Controllers\HrParkingController;
+use App\Http\Controllers\HrPenaltyRuleController;
 use App\Http\Controllers\HrPersonnelProcessController;
 use App\Http\Controllers\HrPositionController;
 use App\Http\Controllers\HrRequestController;
@@ -128,6 +130,14 @@ Route::middleware(['auth', 'active.user'])->group(function (): void {
         Route::get('/leave/{leaveRequest}', [HrLeaveController::class, 'show'])->name('hr.leave.show');
         Route::patch('/leave/{leaveRequest}/review', [HrLeaveController::class, 'review'])->name('hr.leave.review');
         Route::get('/salaries', [HrSalaryController::class, 'index'])->name('hr.salary.index');
+        Route::get('/salaries/{employee}', [HrSalaryController::class, 'show'])->name('hr.salary.show');
+        Route::patch('/salaries/{employee}', [HrSalaryController::class, 'update'])->name('hr.salary.update');
+        Route::resource('penalty-rules', HrPenaltyRuleController::class)
+            ->parameters(['penalty-rules' => 'penaltyRule'])
+            ->except('show')->names('hr.penalty-rules');
+        Route::resource('allowance-rules', HrAllowanceRuleController::class)
+            ->parameters(['allowance-rules' => 'allowanceRule'])
+            ->except('show')->names('hr.allowance-rules');
         Route::get('/parking', [HrParkingController::class, 'index'])->name('hr.parking');
         Route::patch('/parking/requests/{parkingRequest}', [HrParkingController::class, 'review'])->name('hr.parking.review');
         Route::post('/parking/permits/{parkingPermit}/end', [HrParkingController::class, 'end'])->name('hr.parking.end');

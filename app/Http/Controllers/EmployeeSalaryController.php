@@ -13,6 +13,7 @@ class EmployeeSalaryController extends Controller
 
     public function index(Request $request): View
     {
+        $request->validate(['year' => ['nullable', 'integer', 'between:2000,2100'], 'month' => ['nullable', 'integer', 'between:1,12']]);
         $employee = $this->employee($request);
         $year = (int) $request->integer('year', now()->year);
         $month = max(1, min(12, (int) $request->integer('month', now()->month)));
