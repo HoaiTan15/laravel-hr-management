@@ -12,6 +12,7 @@ use App\Models\PersonnelProcess;
 use App\Models\Position;
 use App\Models\Request as EmployeeRequest;
 use App\Models\Task;
+use App\Services\AttendanceService;
 use App\Services\ExcelExportService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class HrManagementController extends Controller
 {
+    public function __construct(private readonly AttendanceService $attendanceService) {}
+
     public function dashboard(Request $request): View
     {
         $user = $request->user()->load('employee.department', 'employee.position');
@@ -38,7 +41,7 @@ class HrManagementController extends Controller
         $openRecruitment = PersonnelProcess::where('type', PersonnelProcessType::RECRUITMENT)
             ->whereIn('status', ['draft', 'in_progress'])
             ->count();
-        $lateCount = $todayAttendances->filter(fn ($attendance) => $attendance->check_in_at?->format('H:i:s') > '08:00:00')->count();
+        $lateCount = $todayAttendances->filter(fn (Attendance $attendance): bool => $this->attendanceService->isLate($attendance))->count();
         $notCheckedOut = $todayAttendances->filter(fn ($attendance) => ! $attendance->check_out_at)->count();
 
         return view('hr.dashboard', [

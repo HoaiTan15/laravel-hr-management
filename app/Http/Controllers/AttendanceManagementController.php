@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdjustAttendanceRequest;
 use App\Models\Attendance;
 use App\Models\Department;
+use App\Services\AttendanceService;
 use App\Services\ExcelExportService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AttendanceManagementController extends Controller
 {
+    public function __construct(private readonly AttendanceService $attendanceService) {}
+
     public function index(Request $request): View|StreamedResponse
     {
         $records = Attendance::with('employee.department')
@@ -45,7 +48,7 @@ class AttendanceManagementController extends Controller
             'totalRecords' => $records->count(),
             'checkedOutRecords' => $records->whereNotNull('check_out_at')->count(),
             'openRecords' => $records->whereNull('check_out_at')->count(),
-            'lateRecords' => $records->filter(fn ($record) => $record->check_in_at?->format('H:i:s') > '08:30:00')->count(),
+            'lateRecords' => $records->filter(fn (Attendance $record): bool => $this->attendanceService->isLate($record))->count(),
         ]);
     }
 

@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             PositionSeeder::class,
             UserSeeder::class,
             EmployeeSeeder::class,
+            AllowanceRuleSeeder::class,
+            PenaltyRuleSeeder::class,
             DemoDataSeeder::class,
         ]);
     }
